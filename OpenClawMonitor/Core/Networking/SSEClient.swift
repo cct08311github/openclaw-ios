@@ -9,10 +9,16 @@ struct SSEEvent: Sendable {
     let data: String
 }
 
+protocol SSEClientProtocol: Sendable {
+    func connect(endpoint: Endpoint) async -> AsyncStream<SSEEvent>
+    func disconnect() async
+    func getState() async -> SSEConnectionState
+}
+
 /// Lightweight Server-Sent Events client using URLSession bytes streaming.
 /// Supports Bearer token auth, automatic reconnection with exponential backoff,
 /// and heartbeat timeout detection.
-actor SSEClient {
+actor SSEClient: SSEClientProtocol {
     private let baseURL: URL
     private let tokenProvider: @Sendable () -> String?
     private var task: Task<Void, Never>?
@@ -145,6 +151,10 @@ actor SSEClient {
         task?.cancel()
         task = nil
         state = .disconnected
+    }
+
+    func getState() -> SSEConnectionState {
+        state
     }
 
     private func setState(_ newState: SSEConnectionState) {

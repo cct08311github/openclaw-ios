@@ -3,7 +3,7 @@ import SwiftUI
 struct LogsView: View {
     @State private var viewModel: LogsViewModel
 
-    init(sseClient: SSEClient) {
+    init(sseClient: any SSEClientProtocol) {
         _viewModel = State(initialValue: LogsViewModel(sseClient: sseClient))
     }
 

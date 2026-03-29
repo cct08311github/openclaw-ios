@@ -26,3 +26,27 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
         INFOPLIST_KEY_CFBundleDisplayName: "OC Monitor"
+    scheme:
+      testTargets:
+        - OpenClawMonitorTests
+        - OpenClawMonitorUITests
+
+  OpenClawMonitorTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [Tests/Unit, Tests/Integration]
+    dependencies:
+      - target: OpenClawMonitor
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+
+  OpenClawMonitorUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [Tests/UITests]
+    dependencies:
+      - target: OpenClawMonitor
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES

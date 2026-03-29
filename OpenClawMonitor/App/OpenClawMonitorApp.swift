@@ -26,14 +26,24 @@ struct OpenClawMonitorApp: App {
         _logsSSE = State(initialValue: logSSE)
     }
 
+    private static var isUITesting: Bool {
+        ProcessInfo.processInfo.arguments.contains("--uitesting")
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView(apiClient: apiClient, dashboardSSE: dashboardSSE, logsSSE: logsSSE)
                 .environment(authManager)
                 .environment(connectivity)
                 .task { @MainActor in
-                    connectivity.start()
-                    await authManager.restoreSession()
+                    if Self.isUITesting {
+                        // Skip real network calls in UI tests — force authenticated state
+                        authManager.isAuthenticated = true
+                        authManager.username = "uitest"
+                    } else {
+                        connectivity.start()
+                        await authManager.restoreSession()
+                    }
                 }
                 .preferredColorScheme(.dark)
         }

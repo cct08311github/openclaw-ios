@@ -8,69 +8,138 @@
 
 /* Begin PBXBuildFile section */
 		0407FC9ED972715DA6849000 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ED71CDFC44FAFE0279C39C /* Task.swift */; };
+		06AF39E5FAF025848DA6EB6A /* TaskHubFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6980AE6BF5E6015105221538 /* TaskHubFlowTests.swift */; };
+		09BFEA1D29A514E561E81EE8 /* CronFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB74E7AE6EB64EB20CC30EE /* CronFlowTests.swift */; };
 		1A0331B3FF2456251EE773EF /* TaskHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781C16DA0E419F3FCCB5CCC /* TaskHubView.swift */; };
+		1BBF27DE69D3BCAF9038086F /* CronViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71838136EB41672CC0344DDD /* CronViewModelTests.swift */; };
+		1C3B5A6AF346549159DAAD5E /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5472485AEBC94D10AA233 /* TaskTests.swift */; };
 		1E7446523C2CED731D45B743 /* CronJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2D4B070ECDF158E2D2A7C1 /* CronJob.swift */; };
+		217343CC6E48A60521361995 /* CommandsFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745EA9B46E2DB6B34860E8C4 /* CommandsFlowTests.swift */; };
+		24D1905122E4C55A4E0AA758 /* LogsFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A293CEC73119BF80FA62E /* LogsFlowTests.swift */; };
 		27BF35F764375E4598E5C6A6 /* CommandsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE71589392ED566B35EF56 /* CommandsView.swift */; };
 		2885D71C7C241E923E024F16 /* SystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3996994EEFCE86292CABD884 /* SystemView.swift */; };
 		38DCC268BEB87A9B505E4734 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218FD84572FD6C66D75D9C4 /* DashboardView.swift */; };
 		4694801719DC588E6ED6A5BC /* ConnectivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DDCA91B6D40C91012735F0 /* ConnectivityMonitor.swift */; };
 		5184989F3518E77900A07FDF /* CronViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA5B9AD190868BC2871F76B /* CronViewModel.swift */; };
+		536952886CC76C0D9842B3EE /* DashboardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9AF7F30C7958A27CC93FD8 /* DashboardViewModelTests.swift */; };
+		575EF7D445F00D858C5E81BD /* CommandsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CB90DEAD64600048C0A9C3 /* CommandsViewModelTests.swift */; };
 		57BA971B002EB7971A758687 /* SystemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2FE70F5B33B6681144EDA8 /* SystemViewModel.swift */; };
 		58BDC7E4A145BA53425221AA /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D00DB488254B57FCBCF8A /* APIResponse.swift */; };
+		598BAF8811F4D9276B617A5E /* APIResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28525528FF5D74EED9B0BC /* APIResponseTests.swift */; };
+		73859C060413CF69F49B5B63 /* TaskHubViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D939B0512A3079632F6E86DF /* TaskHubViewModelTests.swift */; };
+		882B29C8F1A4101F9FAA458C /* MockSSEClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55D569FE90AC547F19B867C /* MockSSEClient.swift */; };
 		8E7483FDCE8BB147305CE313 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF435D3ED46B6BAE843FD1 /* ContentView.swift */; };
+		8EA376187BBB3B9BAA1654E0 /* AlertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEFCAA21FD6E87D381204E8 /* AlertTests.swift */; };
+		903BA78A33D7B8B57A826F72 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2206FA95ECF83F19B69122FB /* AuthManagerTests.swift */; };
+		91658090EE1E557C6F037B27 /* CronJobTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92829C307C51938152EB5BF1 /* CronJobTests.swift */; };
+		98525774F3FA02F070BE64AB /* LoginFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB242E1F4B829F3FE160EB /* LoginFlowTests.swift */; };
 		99C241137259351192165C21 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BB2697DC18FBE8CC6FDF16 /* Alert.swift */; };
 		9B3B996E2B2C999C870BBAFB /* LogsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284F20378057999A19AE78D8 /* LogsViewModel.swift */; };
+		9C04BB90C197293798F9FF10 /* SystemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396C827C525AB8957F7BC813 /* SystemViewModelTests.swift */; };
 		9EDB8D2B7704C8324B55B2FE /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EABB901E6800ED7E070B0B /* AppLogger.swift */; };
 		9FAEEB61C2FAB82D7FF507D6 /* AgentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3534A8CE6AD27567A3CB1 /* AgentDetailView.swift */; };
 		A0708FE2DAADA1A20DBC5EED /* LogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505BEC85D3FC95D1612E0160 /* LogsView.swift */; };
 		AB43853830538B94413B6ADB /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D4AFDCEAC51B2A932A93FF /* APIClient.swift */; };
+		ABED969CE2561A58F6BD878F /* DashboardFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B727299D104562ADFA0C4D5F /* DashboardFlowTests.swift */; };
+		AC163C84F143C15E4FCA244E /* LogsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEB5656F976ABC29970FB3F /* LogsViewModelTests.swift */; };
 		AC6F7EC5002162F2BFD8CD01 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EFB1AAC58031140EF401AA /* Endpoint.swift */; };
 		B252EAA8692D98B2D0E7376A /* CronView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25932F0E517698DE13D7C2F9 /* CronView.swift */; };
 		B41D92D49CD0B6E0A4402CFA /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FD962CE4264F5FCF35AFF4 /* DashboardViewModel.swift */; };
 		B98EAF4021CCF488FE8292E5 /* OpenClawMonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6A57BF27E65BDEF19EDA85 /* OpenClawMonitorApp.swift */; };
+		BFBD5779942329CCAA145CE2 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A16C8C08FFA06926441B89F /* MockURLProtocol.swift */; };
+		BFDF48B81E0EB06B9066D619 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF9510BEDF63E995C1F2312 /* APIClientTests.swift */; };
+		C39C191C2B55BE7893419217 /* MockAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F496DEF48D5093532B2505A /* MockAPIClient.swift */; };
 		C4425E08DCF0623EC081F402 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C65D2845DAA79C2B7FF426 /* AuthManager.swift */; };
 		C71566E265700F0B4D36D282 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5763AADF4683F3F3B20FA /* Haptics.swift */; };
 		CC7523239E88643086548D38 /* MonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2070C28765B27D51E456B0E5 /* MonitorView.swift */; };
 		D0C768816551D2CD6EE50F79 /* SSEClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B60F4DF5029CAA7E0CDC5B /* SSEClient.swift */; };
 		E1E638CC52A923DF1B318082 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79EF61F710CF7788BA703ED /* AppError.swift */; };
+		EB17E1D8452F878074FB36BD /* AppLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6044A339ABF278D03DB03E65 /* AppLoggerTests.swift */; };
+		F04E9DBA49D2B074D7EE7B63 /* AppErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32196968739C7FD3042F113 /* AppErrorTests.swift */; };
 		F484861D055357456F346EB7 /* Agent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA917CEB64716FCA72AA469C /* Agent.swift */; };
+		F76F20B10FB7DD9F308BBA77 /* EndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D6768D49843579C45AAA5B /* EndpointTests.swift */; };
 		FB6A2A1A207DBF48B38DF39A /* TaskHubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A1175C70D96C423706D26D /* TaskHubViewModel.swift */; };
 		FCEF1538289CD9733119CDED /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE155DF14FCAB285DDA4A57 /* LoginView.swift */; };
 		FD7A0CC0F9D3FA5B245335FD /* DebugLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C2C9BF729E79945452C2A2 /* DebugLogView.swift */; };
+		FE34F3BFEC3E549EE08B3559 /* AgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADDC99762F5100FD992E9A7 /* AgentTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6E89176CC54E0BAFBB8C821A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7484296D032AB3F915747E90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9AC7EFE1279721B32A3513E5;
+			remoteInfo = OpenClawMonitor;
+		};
+		CAD4B7B03CD68699FDC35399 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7484296D032AB3F915747E90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9AC7EFE1279721B32A3513E5;
+			remoteInfo = OpenClawMonitor;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		05EFB1AAC58031140EF401AA /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		0781C16DA0E419F3FCCB5CCC /* TaskHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHubView.swift; sourceTree = "<group>"; };
+		08FB242E1F4B829F3FE160EB /* LoginFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowTests.swift; sourceTree = "<group>"; };
 		0AD3534A8CE6AD27567A3CB1 /* AgentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentDetailView.swift; sourceTree = "<group>"; };
+		0F496DEF48D5093532B2505A /* MockAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIClient.swift; sourceTree = "<group>"; };
+		1A28525528FF5D74EED9B0BC /* APIResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseTests.swift; sourceTree = "<group>"; };
+		1E4A293CEC73119BF80FA62E /* LogsFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsFlowTests.swift; sourceTree = "<group>"; };
 		1EE155DF14FCAB285DDA4A57 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2070C28765B27D51E456B0E5 /* MonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorView.swift; sourceTree = "<group>"; };
+		2206FA95ECF83F19B69122FB /* AuthManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
 		25932F0E517698DE13D7C2F9 /* CronView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronView.swift; sourceTree = "<group>"; };
 		284F20378057999A19AE78D8 /* LogsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewModel.swift; sourceTree = "<group>"; };
+		31CB90DEAD64600048C0A9C3 /* CommandsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsViewModelTests.swift; sourceTree = "<group>"; };
 		32E38AF6E9AFEEEAB892AEFB /* OpenClawMonitor.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OpenClawMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		396C827C525AB8957F7BC813 /* SystemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemViewModelTests.swift; sourceTree = "<group>"; };
 		3996994EEFCE86292CABD884 /* SystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemView.swift; sourceTree = "<group>"; };
+		3A9AF7F30C7958A27CC93FD8 /* DashboardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelTests.swift; sourceTree = "<group>"; };
 		42C65D2845DAA79C2B7FF426 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		49FD962CE4264F5FCF35AFF4 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		505BEC85D3FC95D1612E0160 /* LogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsView.swift; sourceTree = "<group>"; };
 		5218FD84572FD6C66D75D9C4 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		58B60F4DF5029CAA7E0CDC5B /* SSEClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEClient.swift; sourceTree = "<group>"; };
+		5ADDC99762F5100FD992E9A7 /* AgentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentTests.swift; sourceTree = "<group>"; };
 		5C6A57BF27E65BDEF19EDA85 /* OpenClawMonitorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenClawMonitorApp.swift; sourceTree = "<group>"; };
+		5DEFCAA21FD6E87D381204E8 /* AlertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTests.swift; sourceTree = "<group>"; };
+		6044A339ABF278D03DB03E65 /* AppLoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoggerTests.swift; sourceTree = "<group>"; };
 		64D4AFDCEAC51B2A932A93FF /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		6980AE6BF5E6015105221538 /* TaskHubFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHubFlowTests.swift; sourceTree = "<group>"; };
+		6A16C8C08FFA06926441B89F /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		6EF9510BEDF63E995C1F2312 /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
+		71838136EB41672CC0344DDD /* CronViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronViewModelTests.swift; sourceTree = "<group>"; };
+		745EA9B46E2DB6B34860E8C4 /* CommandsFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsFlowTests.swift; sourceTree = "<group>"; };
 		8F2FE70F5B33B6681144EDA8 /* SystemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemViewModel.swift; sourceTree = "<group>"; };
+		92829C307C51938152EB5BF1 /* CronJobTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronJobTests.swift; sourceTree = "<group>"; };
 		93FF435D3ED46B6BAE843FD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9BA5B9AD190868BC2871F76B /* CronViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronViewModel.swift; sourceTree = "<group>"; };
 		9C2D4B070ECDF158E2D2A7C1 /* CronJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronJob.swift; sourceTree = "<group>"; };
 		A23D00DB488254B57FCBCF8A /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		A32196968739C7FD3042F113 /* AppErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrorTests.swift; sourceTree = "<group>"; };
 		A4EABB901E6800ED7E070B0B /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
+		ACAFA68A6B6DB12481512381 /* OpenClawMonitorUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = OpenClawMonitorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B727299D104562ADFA0C4D5F /* DashboardFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardFlowTests.swift; sourceTree = "<group>"; };
 		B8ED71CDFC44FAFE0279C39C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C0C2C9BF729E79945452C2A2 /* DebugLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLogView.swift; sourceTree = "<group>"; };
 		C5DDCA91B6D40C91012735F0 /* ConnectivityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityMonitor.swift; sourceTree = "<group>"; };
+		D6D6768D49843579C45AAA5B /* EndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointTests.swift; sourceTree = "<group>"; };
+		D8955470108CF18B43CEDAEC /* OpenClawMonitorTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = OpenClawMonitorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D939B0512A3079632F6E86DF /* TaskHubViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHubViewModelTests.swift; sourceTree = "<group>"; };
 		D9A5763AADF4683F3F3B20FA /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		DFEB5656F976ABC29970FB3F /* LogsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewModelTests.swift; sourceTree = "<group>"; };
 		E8BB2697DC18FBE8CC6FDF16 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		EA917CEB64716FCA72AA469C /* Agent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Agent.swift; sourceTree = "<group>"; };
+		EDE5472485AEBC94D10AA233 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
+		F55D569FE90AC547F19B867C /* MockSSEClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSSEClient.swift; sourceTree = "<group>"; };
 		F79EF61F710CF7788BA703ED /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		F7A1175C70D96C423706D26D /* TaskHubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHubViewModel.swift; sourceTree = "<group>"; };
 		FCFE71589392ED566B35EF56 /* CommandsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsView.swift; sourceTree = "<group>"; };
+		FEB74E7AE6EB64EB20CC30EE /* CronFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronFlowTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -83,6 +152,15 @@
 				58B60F4DF5029CAA7E0CDC5B /* SSEClient.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		10790872FC6B286C16A86B79 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				42C4F06E1245994C88594A4A /* E2E */,
+			);
+			name = UITests;
+			path = Tests/UITests;
 			sourceTree = "<group>";
 		};
 		15D6F2E61D146D5F764FC552 /* Commands */ = {
@@ -118,10 +196,25 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
+		42C4F06E1245994C88594A4A /* E2E */ = {
+			isa = PBXGroup;
+			children = (
+				745EA9B46E2DB6B34860E8C4 /* CommandsFlowTests.swift */,
+				FEB74E7AE6EB64EB20CC30EE /* CronFlowTests.swift */,
+				B727299D104562ADFA0C4D5F /* DashboardFlowTests.swift */,
+				08FB242E1F4B829F3FE160EB /* LoginFlowTests.swift */,
+				1E4A293CEC73119BF80FA62E /* LogsFlowTests.swift */,
+				6980AE6BF5E6015105221538 /* TaskHubFlowTests.swift */,
+			);
+			path = E2E;
+			sourceTree = "<group>";
+		};
 		45739CD6928332162AE5FFA2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				32E38AF6E9AFEEEAB892AEFB /* OpenClawMonitor.app */,
+				D8955470108CF18B43CEDAEC /* OpenClawMonitorTests.xctest */,
+				ACAFA68A6B6DB12481512381 /* OpenClawMonitorUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,6 +228,18 @@
 				2070C28765B27D51E456B0E5 /* MonitorView.swift */,
 			);
 			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		4F89D42DC6B10CBF9D0D1E30 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5ADDC99762F5100FD992E9A7 /* AgentTests.swift */,
+				5DEFCAA21FD6E87D381204E8 /* AlertTests.swift */,
+				1A28525528FF5D74EED9B0BC /* APIResponseTests.swift */,
+				92829C307C51938152EB5BF1 /* CronJobTests.swift */,
+				EDE5472485AEBC94D10AA233 /* TaskTests.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		6664482F05E2869496B13210 /* Features */ = {
@@ -160,10 +265,23 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		70317DA5E92C47AFB494B8D6 /* Integration */ = {
+			isa = PBXGroup;
+			children = (
+				A1D27955F8A28A492F8158DD /* Mocks */,
+				DFA744F1117E20FE6BE2AC45 /* ViewModels */,
+			);
+			name = Integration;
+			path = Tests/Integration;
+			sourceTree = "<group>";
+		};
 		7131C3E4A8B1DF55BD4AD552 = {
 			isa = PBXGroup;
 			children = (
+				70317DA5E92C47AFB494B8D6 /* Integration */,
 				AC34768F95858BFDC8819516 /* OpenClawMonitor */,
+				10790872FC6B286C16A86B79 /* UITests */,
+				B3B0140CD9BEB134B30A6D8D /* Unit */,
 				45739CD6928332162AE5FFA2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -223,6 +341,16 @@
 			path = TaskHub;
 			sourceTree = "<group>";
 		};
+		A1D27955F8A28A492F8158DD /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0F496DEF48D5093532B2505A /* MockAPIClient.swift */,
+				F55D569FE90AC547F19B867C /* MockSSEClient.swift */,
+				6A16C8C08FFA06926441B89F /* MockURLProtocol.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		AC34768F95858BFDC8819516 /* OpenClawMonitor */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,12 +361,49 @@
 			path = OpenClawMonitor;
 			sourceTree = "<group>";
 		};
+		B3B0140CD9BEB134B30A6D8D /* Unit */ = {
+			isa = PBXGroup;
+			children = (
+				B6177D66BCC54A13C4A0DB5C /* Auth */,
+				BC96D175C7128390486A402B /* Errors */,
+				CD25B817449434DC148F6977 /* Logging */,
+				4F89D42DC6B10CBF9D0D1E30 /* Models */,
+				D38398F4754AE4577D33464E /* Networking */,
+			);
+			name = Unit;
+			path = Tests/Unit;
+			sourceTree = "<group>";
+		};
+		B6177D66BCC54A13C4A0DB5C /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				2206FA95ECF83F19B69122FB /* AuthManagerTests.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		BC96D175C7128390486A402B /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				A32196968739C7FD3042F113 /* AppErrorTests.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		BE4C092EFE5BFA8D35C95B8F /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				42C65D2845DAA79C2B7FF426 /* AuthManager.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		CD25B817449434DC148F6977 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				6044A339ABF278D03DB03E65 /* AppLoggerTests.swift */,
+			);
+			path = Logging;
 			sourceTree = "<group>";
 		};
 		D0BDA628A3ECA115CBDC759B /* App */ = {
@@ -248,6 +413,28 @@
 				5C6A57BF27E65BDEF19EDA85 /* OpenClawMonitorApp.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		D38398F4754AE4577D33464E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				6EF9510BEDF63E995C1F2312 /* APIClientTests.swift */,
+				D6D6768D49843579C45AAA5B /* EndpointTests.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		DFA744F1117E20FE6BE2AC45 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				31CB90DEAD64600048C0A9C3 /* CommandsViewModelTests.swift */,
+				71838136EB41672CC0344DDD /* CronViewModelTests.swift */,
+				3A9AF7F30C7958A27CC93FD8 /* DashboardViewModelTests.swift */,
+				DFEB5656F976ABC29970FB3F /* LogsViewModelTests.swift */,
+				396C827C525AB8957F7BC813 /* SystemViewModelTests.swift */,
+				D939B0512A3079632F6E86DF /* TaskHubViewModelTests.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		E5D5C1812E92584D31083FBB /* Core */ = {
@@ -266,6 +453,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		234C5735E8EBCB2E7F5B4F42 /* OpenClawMonitorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FEE2356D29CF6306C267279 /* Build configuration list for PBXNativeTarget "OpenClawMonitorTests" */;
+			buildPhases = (
+				4F2BAD3FF467B85FE794C7B0 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D06560C9F1EA00B67420897 /* PBXTargetDependency */,
+			);
+			name = OpenClawMonitorTests;
+			packageProductDependencies = (
+			);
+			productName = OpenClawMonitorTests;
+			productReference = D8955470108CF18B43CEDAEC /* OpenClawMonitorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		9AC7EFE1279721B32A3513E5 /* OpenClawMonitor */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 46FAC2F905099D99C414CE24 /* Build configuration list for PBXNativeTarget "OpenClawMonitor" */;
@@ -283,6 +488,24 @@
 			productReference = 32E38AF6E9AFEEEAB892AEFB /* OpenClawMonitor.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A8FB0AB1422CE1AC017A8EAF /* OpenClawMonitorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CBA28D1BAC993D1BB71919A /* Build configuration list for PBXNativeTarget "OpenClawMonitorUITests" */;
+			buildPhases = (
+				DC200C6949000D7D36092C2A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8CD29361A5DE278450C632BF /* PBXTargetDependency */,
+			);
+			name = OpenClawMonitorUITests;
+			packageProductDependencies = (
+			);
+			productName = OpenClawMonitorUITests;
+			productReference = ACAFA68A6B6DB12481512381 /* OpenClawMonitorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -292,8 +515,15 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					234C5735E8EBCB2E7F5B4F42 = {
+						DevelopmentTeam = "";
+					};
 					9AC7EFE1279721B32A3513E5 = {
 						DevelopmentTeam = "";
+					};
+					A8FB0AB1422CE1AC017A8EAF = {
+						DevelopmentTeam = "";
+						TestTargetID = 9AC7EFE1279721B32A3513E5;
 					};
 				};
 			};
@@ -312,6 +542,8 @@
 			projectRoot = "";
 			targets = (
 				9AC7EFE1279721B32A3513E5 /* OpenClawMonitor */,
+				234C5735E8EBCB2E7F5B4F42 /* OpenClawMonitorTests */,
+				A8FB0AB1422CE1AC017A8EAF /* OpenClawMonitorUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -354,7 +586,59 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4F2BAD3FF467B85FE794C7B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDF48B81E0EB06B9066D619 /* APIClientTests.swift in Sources */,
+				598BAF8811F4D9276B617A5E /* APIResponseTests.swift in Sources */,
+				FE34F3BFEC3E549EE08B3559 /* AgentTests.swift in Sources */,
+				8EA376187BBB3B9BAA1654E0 /* AlertTests.swift in Sources */,
+				F04E9DBA49D2B074D7EE7B63 /* AppErrorTests.swift in Sources */,
+				EB17E1D8452F878074FB36BD /* AppLoggerTests.swift in Sources */,
+				903BA78A33D7B8B57A826F72 /* AuthManagerTests.swift in Sources */,
+				575EF7D445F00D858C5E81BD /* CommandsViewModelTests.swift in Sources */,
+				91658090EE1E557C6F037B27 /* CronJobTests.swift in Sources */,
+				1BBF27DE69D3BCAF9038086F /* CronViewModelTests.swift in Sources */,
+				536952886CC76C0D9842B3EE /* DashboardViewModelTests.swift in Sources */,
+				F76F20B10FB7DD9F308BBA77 /* EndpointTests.swift in Sources */,
+				AC163C84F143C15E4FCA244E /* LogsViewModelTests.swift in Sources */,
+				C39C191C2B55BE7893419217 /* MockAPIClient.swift in Sources */,
+				882B29C8F1A4101F9FAA458C /* MockSSEClient.swift in Sources */,
+				BFBD5779942329CCAA145CE2 /* MockURLProtocol.swift in Sources */,
+				9C04BB90C197293798F9FF10 /* SystemViewModelTests.swift in Sources */,
+				73859C060413CF69F49B5B63 /* TaskHubViewModelTests.swift in Sources */,
+				1C3B5A6AF346549159DAAD5E /* TaskTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC200C6949000D7D36092C2A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				217343CC6E48A60521361995 /* CommandsFlowTests.swift in Sources */,
+				09BFEA1D29A514E561E81EE8 /* CronFlowTests.swift in Sources */,
+				ABED969CE2561A58F6BD878F /* DashboardFlowTests.swift in Sources */,
+				98525774F3FA02F070BE64AB /* LoginFlowTests.swift in Sources */,
+				24D1905122E4C55A4E0AA758 /* LogsFlowTests.swift in Sources */,
+				06AF39E5FAF025848DA6EB6A /* TaskHubFlowTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4D06560C9F1EA00B67420897 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9AC7EFE1279721B32A3513E5 /* OpenClawMonitor */;
+			targetProxy = 6E89176CC54E0BAFBB8C821A /* PBXContainerItemProxy */;
+		};
+		8CD29361A5DE278450C632BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9AC7EFE1279721B32A3513E5 /* OpenClawMonitor */;
+			targetProxy = CAD4B7B03CD68699FDC35399 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		26CC6B38CE45DB0B7A4F86D0 /* Release */ = {
@@ -458,6 +742,23 @@
 			};
 			name = Debug;
 		};
+		431AD7DE9E5F58C77731102B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.openclaw.OpenClawMonitorUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OpenClawMonitor;
+			};
+			name = Release;
+		};
 		6D09BB767E7991714802C92F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -522,14 +823,83 @@
 			};
 			name = Debug;
 		};
+		916B82153F544FBBCF58B226 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.openclaw.OpenClawMonitorTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenClawMonitor.app/OpenClawMonitor";
+			};
+			name = Release;
+		};
+		B439F68D96E7216F8DD30987 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.openclaw.OpenClawMonitorUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OpenClawMonitor;
+			};
+			name = Debug;
+		};
+		DDD6A836AA3F39800A233E7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.openclaw.OpenClawMonitorTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenClawMonitor.app/OpenClawMonitor";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3CBA28D1BAC993D1BB71919A /* Build configuration list for PBXNativeTarget "OpenClawMonitorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B439F68D96E7216F8DD30987 /* Debug */,
+				431AD7DE9E5F58C77731102B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		46FAC2F905099D99C414CE24 /* Build configuration list for PBXNativeTarget "OpenClawMonitor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				34F00060BBD5A1F42FDE3318 /* Debug */,
 				26CC6B38CE45DB0B7A4F86D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7FEE2356D29CF6306C267279 /* Build configuration list for PBXNativeTarget "OpenClawMonitorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDD6A836AA3F39800A233E7A /* Debug */,
+				916B82153F544FBBCF58B226 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

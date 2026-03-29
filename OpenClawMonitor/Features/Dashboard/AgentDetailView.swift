@@ -49,10 +49,10 @@ final class AgentDetailViewModel {
     var isLoading = false
     var error: String?
 
-    private let apiClient: APIClient
+    private let apiClient: any APIClientProtocol
     let agent: Agent
 
-    init(apiClient: APIClient, agent: Agent) {
+    init(apiClient: any APIClientProtocol, agent: Agent) {
         self.apiClient = apiClient
         self.agent = agent
     }
@@ -87,7 +87,7 @@ final class AgentDetailViewModel {
 struct AgentDetailView: View {
     @State private var viewModel: AgentDetailViewModel
 
-    init(apiClient: APIClient, agent: Agent) {
+    init(apiClient: any APIClientProtocol, agent: Agent) {
         _viewModel = State(initialValue: AgentDetailViewModel(apiClient: apiClient, agent: agent))
     }
 

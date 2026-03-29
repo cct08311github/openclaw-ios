@@ -5,7 +5,7 @@ struct CronView: View {
     @State private var confirmRun: CronJob?
     @State private var confirmDelete: CronJob?
 
-    init(apiClient: APIClient) {
+    init(apiClient: any APIClientProtocol) {
         _viewModel = State(initialValue: CronViewModel(apiClient: apiClient))
     }
 
