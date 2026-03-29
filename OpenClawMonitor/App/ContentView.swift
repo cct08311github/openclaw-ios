@@ -3,10 +3,13 @@ import SwiftUI
 struct ContentView: View {
     @Environment(AuthManager.self) private var auth
     @Environment(ConnectivityMonitor.self) private var connectivity
+    let apiClient: APIClient
+    let dashboardSSE: SSEClient
+    let logsSSE: SSEClient
 
     var body: some View {
         if auth.isAuthenticated {
-            MainTabView()
+            MainTabView(apiClient: apiClient, dashboardSSE: dashboardSSE, logsSSE: logsSSE)
                 .overlay(alignment: .top) {
                     if !connectivity.isConnected {
                         OfflineBanner()
@@ -19,13 +22,17 @@ struct ContentView: View {
 }
 
 struct MainTabView: View {
+    let apiClient: APIClient
+    let dashboardSSE: SSEClient
+    let logsSSE: SSEClient
+
     var body: some View {
         TabView {
             Tab("監控", systemImage: "rectangle.grid.2x2") {
-                DashboardPlaceholder()
+                DashboardView(apiClient: apiClient, sseClient: dashboardSSE)
             }
             Tab("日誌", systemImage: "text.justify.left") {
-                LogsPlaceholder()
+                LogsView(sseClient: logsSSE)
             }
             Tab("系統", systemImage: "chart.bar") {
                 SystemPlaceholder()
@@ -37,30 +44,12 @@ struct MainTabView: View {
     }
 }
 
-// MARK: - Placeholders (will be replaced in Phase 2-5)
-
-private struct DashboardPlaceholder: View {
-    var body: some View {
-        NavigationStack {
-            Text("Dashboard — Phase 2")
-                .navigationTitle("監控")
-        }
-    }
-}
-
-private struct LogsPlaceholder: View {
-    var body: some View {
-        NavigationStack {
-            Text("Logs — Phase 2")
-                .navigationTitle("日誌")
-        }
-    }
-}
+// MARK: - Placeholders (Phase 4-5)
 
 private struct SystemPlaceholder: View {
     var body: some View {
         NavigationStack {
-            Text("System — Phase 4")
+            ContentUnavailableView("系統狀態", systemImage: "chart.bar", description: Text("Phase 4"))
                 .navigationTitle("系統")
         }
     }
@@ -69,7 +58,7 @@ private struct SystemPlaceholder: View {
 private struct CommandsPlaceholder: View {
     var body: some View {
         NavigationStack {
-            Text("Commands — Phase 5")
+            ContentUnavailableView("指令控制", systemImage: "terminal", description: Text("Phase 5"))
                 .navigationTitle("指令")
         }
     }
