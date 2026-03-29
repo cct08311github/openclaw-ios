@@ -20,6 +20,7 @@
 		8E7483FDCE8BB147305CE313 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF435D3ED46B6BAE843FD1 /* ContentView.swift */; };
 		99C241137259351192165C21 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BB2697DC18FBE8CC6FDF16 /* Alert.swift */; };
 		9B3B996E2B2C999C870BBAFB /* LogsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284F20378057999A19AE78D8 /* LogsViewModel.swift */; };
+		9EDB8D2B7704C8324B55B2FE /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EABB901E6800ED7E070B0B /* AppLogger.swift */; };
 		9FAEEB61C2FAB82D7FF507D6 /* AgentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3534A8CE6AD27567A3CB1 /* AgentDetailView.swift */; };
 		A0708FE2DAADA1A20DBC5EED /* LogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505BEC85D3FC95D1612E0160 /* LogsView.swift */; };
 		AB43853830538B94413B6ADB /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D4AFDCEAC51B2A932A93FF /* APIClient.swift */; };
@@ -35,6 +36,7 @@
 		F484861D055357456F346EB7 /* Agent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA917CEB64716FCA72AA469C /* Agent.swift */; };
 		FB6A2A1A207DBF48B38DF39A /* TaskHubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A1175C70D96C423706D26D /* TaskHubViewModel.swift */; };
 		FCEF1538289CD9733119CDED /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE155DF14FCAB285DDA4A57 /* LoginView.swift */; };
+		FD7A0CC0F9D3FA5B245335FD /* DebugLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C2C9BF729E79945452C2A2 /* DebugLogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +61,9 @@
 		9BA5B9AD190868BC2871F76B /* CronViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronViewModel.swift; sourceTree = "<group>"; };
 		9C2D4B070ECDF158E2D2A7C1 /* CronJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronJob.swift; sourceTree = "<group>"; };
 		A23D00DB488254B57FCBCF8A /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		A4EABB901E6800ED7E070B0B /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 		B8ED71CDFC44FAFE0279C39C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		C0C2C9BF729E79945452C2A2 /* DebugLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLogView.swift; sourceTree = "<group>"; };
 		C5DDCA91B6D40C91012735F0 /* ConnectivityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityMonitor.swift; sourceTree = "<group>"; };
 		D9A5763AADF4683F3F3B20FA /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		E8BB2697DC18FBE8CC6FDF16 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 				15D6F2E61D146D5F764FC552 /* Commands */,
 				75193F74B66599EC25006FF0 /* Cron */,
 				4E32AD09C6D5F411B85189DC /* Dashboard */,
+				8E3105906196A4999359A463 /* DebugLog */,
 				275DDC9C8B7C6D6F6F31BFFE /* Login */,
 				285C5C29B90FDB071717897E /* Logs */,
 				912C33141FA8D85C14A4A35B /* System */,
@@ -182,6 +187,22 @@
 				B8ED71CDFC44FAFE0279C39C /* Task.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		8E3105906196A4999359A463 /* DebugLog */ = {
+			isa = PBXGroup;
+			children = (
+				C0C2C9BF729E79945452C2A2 /* DebugLogView.swift */,
+			);
+			path = DebugLog;
+			sourceTree = "<group>";
+		};
+		90252ED10BE8D641B1E725C9 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				A4EABB901E6800ED7E070B0B /* AppLogger.swift */,
+			);
+			path = Logging;
 			sourceTree = "<group>";
 		};
 		912C33141FA8D85C14A4A35B /* System */ = {
@@ -235,6 +256,7 @@
 				BE4C092EFE5BFA8D35C95B8F /* Auth */,
 				393AAB663A1BB57C99C3B863 /* Errors */,
 				70154FC07E9C57F1BA4B4B07 /* Extensions */,
+				90252ED10BE8D641B1E725C9 /* Logging */,
 				8456A76BCB1A8DCCA753D6EA /* Models */,
 				04003207B1F6F84D7B2BB6DE /* Networking */,
 			);
@@ -305,6 +327,7 @@
 				9FAEEB61C2FAB82D7FF507D6 /* AgentDetailView.swift in Sources */,
 				99C241137259351192165C21 /* Alert.swift in Sources */,
 				E1E638CC52A923DF1B318082 /* AppError.swift in Sources */,
+				9EDB8D2B7704C8324B55B2FE /* AppLogger.swift in Sources */,
 				C4425E08DCF0623EC081F402 /* AuthManager.swift in Sources */,
 				27BF35F764375E4598E5C6A6 /* CommandsView.swift in Sources */,
 				4694801719DC588E6ED6A5BC /* ConnectivityMonitor.swift in Sources */,
@@ -314,6 +337,7 @@
 				5184989F3518E77900A07FDF /* CronViewModel.swift in Sources */,
 				38DCC268BEB87A9B505E4734 /* DashboardView.swift in Sources */,
 				B41D92D49CD0B6E0A4402CFA /* DashboardViewModel.swift in Sources */,
+				FD7A0CC0F9D3FA5B245335FD /* DebugLogView.swift in Sources */,
 				AC6F7EC5002162F2BFD8CD01 /* Endpoint.swift in Sources */,
 				C71566E265700F0B4D36D282 /* Haptics.swift in Sources */,
 				FCEF1538289CD9733119CDED /* LoginView.swift in Sources */,

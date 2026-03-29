@@ -33,7 +33,7 @@ actor SSEClient {
         // Cancel any existing connection
         disconnect()
 
-        return AsyncStream { continuation in
+        return AsyncStream<SSEEvent> { (continuation: AsyncStream<SSEEvent>.Continuation) in
             task = Task { [weak self] in
                 guard let self else {
                     continuation.finish()
@@ -43,6 +43,7 @@ actor SSEClient {
 
                 while !Task.isCancelled {
                     await self.setState(.connecting)
+                    appLog(AppLogLevel.info, LogCategory.sse, "Connecting to \(endpoint.path) (attempt \(Int(backoff))s backoff)")
 
                     do {
                         let url = self.baseURL.appendingPathComponent(endpoint.path)
@@ -65,6 +66,7 @@ actor SSEClient {
                         }
 
                         if httpResponse.statusCode == 401 {
+                            appLog(AppLogLevel.error, LogCategory.sse, "SSE 401 Unauthorized: \(endpoint.path)")
                             continuation.finish()
                             await self.setState(.disconnected)
                             return  // Don't retry on auth failure
@@ -75,7 +77,8 @@ actor SSEClient {
                         }
 
                         await self.setState(.connected)
-                        backoff = 1  // Reset backoff on successful connection
+                        appLog(AppLogLevel.info, LogCategory.sse, "Connected to \(endpoint.path)")
+                        backoff = 1
 
                         // Parse SSE stream
                         var eventType: String? = nil

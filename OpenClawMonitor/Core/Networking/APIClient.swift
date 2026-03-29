@@ -69,6 +69,7 @@ final class APIClient: APIClientProtocol, @unchecked Sendable {
     private func executeWithRetry(_ endpoint: Endpoint, attempt: Int = 0) async throws -> Data {
         do {
             let request = try buildRequest(endpoint)
+            appLog(.debug, .network, "\(endpoint.method.rawValue) \(endpoint.path)")
             let (data, response) = try await session.data(for: request)
 
             guard let httpResponse = response as? HTTPURLResponse else {
@@ -76,11 +77,13 @@ final class APIClient: APIClientProtocol, @unchecked Sendable {
             }
 
             if httpResponse.statusCode == 401 {
+                appLog(.warning, .network, "401 Unauthorized: \(endpoint.path)")
                 throw AppError.unauthorized
             }
 
             if httpResponse.statusCode >= 400 {
                 let errorBody = try? JSONDecoder().decode(SimpleResponse.self, from: data)
+                appLog(.error, .network, "HTTP \(httpResponse.statusCode): \(endpoint.path) — \(errorBody?.error ?? "unknown")")
                 throw AppError.serverError(errorBody?.error ?? "HTTP \(httpResponse.statusCode)")
             }
 

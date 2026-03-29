@@ -3,6 +3,7 @@ import SwiftUI
 struct SystemView: View {
     @State private var viewModel: SystemViewModel
     @Binding var alertCount: Int
+    @State private var showDebugLog = false
 
     init(apiClient: APIClient, alertCount: Binding<Int>) {
         _viewModel = State(initialValue: SystemViewModel(apiClient: apiClient))
@@ -69,6 +70,18 @@ struct SystemView: View {
                 }
             }
             .navigationTitle("系統")
+            .toolbar {
+                #if DEBUG
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Log", systemImage: "ladybug") {
+                        showDebugLog = true
+                    }
+                }
+                #endif
+            }
+            .sheet(isPresented: $showDebugLog) {
+                DebugLogView()
+            }
             .refreshable { await viewModel.load() }
             .task {
                 await viewModel.load()
