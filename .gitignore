@@ -19,3 +19,7 @@ Packages/
 
 # Misc
 *.moved-aside
+
+# Claude Code
+.claude/
+.remember/
