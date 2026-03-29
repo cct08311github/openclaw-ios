@@ -29,21 +29,36 @@ struct MainTabView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var alertCount = 0
     @State private var backgroundTask: Task<Void, Never>?
+    @State private var selectedTab = 0
 
     var body: some View {
-        TabView {
-            Tab("監控", systemImage: "rectangle.grid.2x2") {
-                MonitorView(apiClient: apiClient, sseClient: dashboardSSE)
-            }
-            Tab("日誌", systemImage: "text.justify.left") {
-                LogsView(sseClient: logsSSE)
-            }
-            Tab("系統", systemImage: "chart.bar") {
-                SystemView(apiClient: apiClient, alertCount: $alertCount)
-            }
-            .badge(alertCount)
-            Tab("指令", systemImage: "terminal") {
-                CommandsView(apiClient: apiClient)
+        TabView(selection: $selectedTab) {
+            MonitorView(apiClient: apiClient, sseClient: dashboardSSE)
+                .tabItem {
+                    Label("監控", systemImage: "rectangle.grid.2x2")
+                }
+                .tag(0)
+            LogsView(sseClient: logsSSE)
+                .tabItem {
+                    Label("日誌", systemImage: "text.justify.left")
+                }
+                .tag(1)
+            SystemView(apiClient: apiClient, alertCount: $alertCount)
+                .tabItem {
+                    Label("系統", systemImage: "chart.bar")
+                }
+                .tag(2)
+                .badge(alertCount)
+            CommandsView(apiClient: apiClient)
+                .tabItem {
+                    Label("指令", systemImage: "terminal")
+                }
+                .tag(3)
+        }
+        .onChange(of: selectedTab) { _, newTab in
+            // 進入系統 tab 後清除 badge
+            if newTab == 2 {
+                alertCount = 0
             }
         }
         .onChange(of: scenePhase) { oldPhase, newPhase in
