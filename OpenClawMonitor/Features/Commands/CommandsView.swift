@@ -7,6 +7,12 @@ struct CommandBody: Encodable {
     var model: String?
 }
 
+struct ChatEntry: Identifiable {
+    let id = UUID()
+    let role: String
+    let text: String
+}
+
 @Observable @MainActor
 final class CommandsViewModel {
     var output: String = ""
@@ -16,7 +22,8 @@ final class CommandsViewModel {
     // Chat
     var selectedAgent: String = ""
     var chatMessage: String = ""
-    var chatHistory: [(role: String, text: String)] = []
+    var chatHistory: [ChatEntry] = []
+    var isLoadingHistory = false
 
     private let apiClient: APIClient
 
@@ -47,15 +54,40 @@ final class CommandsViewModel {
         }
     }
 
+    func loadChatHistory() async {
+        guard !selectedAgent.isEmpty else { return }
+        isLoadingHistory = true
+        defer { isLoadingHistory = false }
+
+        do {
+            let sessions: SessionListResponse = try await apiClient.request(.sessions(agentId: selectedAgent))
+            guard let latest = sessions.sessions?.first else {
+                chatHistory = []
+                return
+            }
+            let content: SessionContentResponse = try await apiClient.request(
+                .sessionContent(agentId: selectedAgent, sessionId: latest.id)
+            )
+            chatHistory = (content.messages ?? []).compactMap { msg in
+                guard let role = msg.role, let text = msg.content, !text.isEmpty else { return nil }
+                return ChatEntry(role: role, text: text)
+            }
+        } catch {
+            chatHistory = []
+            self.error = "載入歷史失敗：\(error.localizedDescription)"
+        }
+    }
+
     func sendChat() async {
-        guard !chatMessage.isEmpty, !selectedAgent.isEmpty else { return }
+        guard !isExecuting, !chatMessage.isEmpty, !selectedAgent.isEmpty else { return }
         let msg = chatMessage
         chatMessage = ""
-        chatHistory.append((role: "user", text: msg))
+        chatHistory.append(ChatEntry(role: "user", text: msg))
+        Haptics.light()
 
         await execute(command: "talk", agentId: selectedAgent, message: msg)
-        if let out = error == nil ? output : nil, !out.isEmpty {
-            chatHistory.append((role: "assistant", text: out))
+        if error == nil, !output.isEmpty {
+            chatHistory.append(ChatEntry(role: "assistant", text: output))
         }
     }
 }
@@ -103,15 +135,28 @@ struct CommandsView: View {
 
                 // Chat
                 Section("Chat") {
-                    TextField("Agent ID", text: $viewModel.selectedAgent)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
+                    HStack {
+                        TextField("Agent ID", text: $viewModel.selectedAgent)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                        Button("載入") {
+                            Task { await viewModel.loadChatHistory() }
+                        }
+                        .disabled(viewModel.selectedAgent.isEmpty)
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                    }
 
-                    ForEach(Array(viewModel.chatHistory.enumerated()), id: \.offset) { _, entry in
+                    if viewModel.isLoadingHistory {
+                        ProgressView("載入歷史...")
+                    }
+
+                    ForEach(viewModel.chatHistory) { entry in
                         HStack(alignment: .top) {
                             Text(entry.role == "user" ? "👤" : "🤖")
                             Text(entry.text)
                                 .font(.subheadline)
+                                .textSelection(.enabled)
                         }
                     }
 

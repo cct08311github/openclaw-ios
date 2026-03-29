@@ -52,6 +52,52 @@ struct TaskHubView: View {
         }
         .refreshable { await viewModel.load() }
         .task { await viewModel.load() }
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    viewModel.showNewTaskSheet = true
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
+        }
+        .sheet(isPresented: $viewModel.showNewTaskSheet) {
+            NewTaskSheet(viewModel: viewModel)
+        }
+    }
+}
+
+struct NewTaskSheet: View {
+    @Bindable var viewModel: TaskHubViewModel
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                TextField("標題", text: $viewModel.newTitle)
+                TextField("Domain", text: $viewModel.newDomain)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                Picker("優先級", selection: $viewModel.newPriority) {
+                    Text("Low").tag(TaskPriority.low)
+                    Text("Medium").tag(TaskPriority.medium)
+                    Text("High").tag(TaskPriority.high)
+                }
+            }
+            .navigationTitle("新增任務")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("取消") { viewModel.showNewTaskSheet = false }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("建立") {
+                        Task { await viewModel.createTask() }
+                    }
+                    .disabled(viewModel.newTitle.isEmpty || viewModel.newDomain.isEmpty)
+                }
+            }
+        }
+        .presentationDetents([.medium])
     }
 }
 

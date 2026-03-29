@@ -2,8 +2,10 @@ import SwiftUI
 
 struct DashboardView: View {
     @State private var viewModel: DashboardViewModel
+    let apiClient: APIClient
 
     init(apiClient: APIClient, sseClient: SSEClient) {
+        self.apiClient = apiClient
         _viewModel = State(initialValue: DashboardViewModel(apiClient: apiClient, sseClient: sseClient))
     }
 
@@ -18,7 +20,12 @@ struct DashboardView: View {
 
                 LazyVStack(spacing: 8) {
                     ForEach(viewModel.agents) { agent in
-                        AgentCardView(agent: agent)
+                        NavigationLink {
+                            AgentDetailView(apiClient: apiClient, agent: agent)
+                        } label: {
+                            AgentCardView(agent: agent)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
 

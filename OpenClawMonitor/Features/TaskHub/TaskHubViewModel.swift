@@ -1,5 +1,11 @@
 import Foundation
 
+struct NewTaskBody: Encodable {
+    let title: String
+    let domain: String
+    let priority: TaskPriority
+}
+
 @Observable @MainActor
 final class TaskHubViewModel {
     var tasks: [OCTask] = []
@@ -7,6 +13,12 @@ final class TaskHubViewModel {
     var selectedDomain: String?
     var isLoading = false
     var error: String?
+
+    // New task form
+    var showNewTaskSheet = false
+    var newTitle = ""
+    var newDomain = ""
+    var newPriority: TaskPriority = .medium
 
     private let apiClient: APIClient
 
@@ -24,10 +36,25 @@ final class TaskHubViewModel {
             }
             let response: TasksResponse = try await apiClient.request(.tasks(domain: selectedDomain))
             tasks = response.tasks ?? []
-            // Extract unique domains
             let allDomains = Set(tasks.compactMap(\.domain))
             if domains.isEmpty { domains = allDomains.sorted() }
             error = nil
+        } catch {
+            self.error = error.localizedDescription
+        }
+    }
+
+    func createTask() async {
+        guard !newTitle.isEmpty, !newDomain.isEmpty else { return }
+        let body = NewTaskBody(title: newTitle, domain: newDomain, priority: newPriority)
+        do {
+            try await apiClient.requestVoid(.createTask(body: body))
+            Haptics.success()
+            newTitle = ""
+            newDomain = ""
+            newPriority = .medium
+            showNewTaskSheet = false
+            await load()
         } catch {
             self.error = error.localizedDescription
         }
