@@ -51,7 +51,11 @@ final class AuthManager {
                 saveToken(token)
                 self.username = response.username
                 isAuthenticated = true
+                #if DEBUG
                 appLog(.info, .auth, "Login success: \(response.username ?? "?")")
+                #else
+                appLog(.info, .auth, "Login success")
+                #endif
             } else {
                 self.error = response.error ?? "登入失敗"
             }

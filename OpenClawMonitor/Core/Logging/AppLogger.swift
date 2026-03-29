@@ -13,8 +13,10 @@ enum AppLogLevel: String, CaseIterable, Sendable, Comparable {
         }
     }
 
+    private static let order: [AppLogLevel] = allCases
     static func < (lhs: AppLogLevel, rhs: AppLogLevel) -> Bool {
-        allCases.firstIndex(of: lhs)! < allCases.firstIndex(of: rhs)!
+        guard let l = order.firstIndex(of: lhs), let r = order.firstIndex(of: rhs) else { return false }
+        return l < r
     }
 }
 
@@ -59,10 +61,6 @@ actor AppLogger {
         }
     }
 
-    func getEntries() -> [LogEntry] {
-        entries
-    }
-
     func getEntries(level: AppLogLevel? = nil, category: LogCategory? = nil) -> [LogEntry] {
         entries.filter { entry in
             (level == nil || entry.level >= level!) &&
@@ -78,5 +76,7 @@ actor AppLogger {
 // MARK: - Convenience global functions
 
 func appLog(_ level: AppLogLevel, _ category: LogCategory, _ message: String) {
-    Task { await AppLogger.shared.log(level, category, message) }
+    Task.detached(priority: .utility) {
+        await AppLogger.shared.log(level, category, message)
+    }
 }

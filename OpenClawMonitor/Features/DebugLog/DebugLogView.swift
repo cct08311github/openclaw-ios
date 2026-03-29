@@ -16,11 +16,7 @@ final class DebugLogViewModel {
     }
 
     func refresh() async {
-        if let level = filterLevel {
-            entries = await AppLogger.shared.getEntries(level: level, category: filterCategory)
-        } else {
-            entries = await AppLogger.shared.getEntries(category: filterCategory)
-        }
+        entries = await AppLogger.shared.getEntries()
     }
 
     func clear() async {
@@ -81,7 +77,9 @@ struct DebugLogView: View {
                         .padding(.vertical, 4)
                     }
                     .background(Color(white: 0.06))
-                    .onChange(of: viewModel.filteredEntries.count) { _, _ in
+                    .onChange(of: viewModel.entries.count) { _, _ in
+                        // Only auto-scroll when new entries arrive and no active filter/search
+                        guard viewModel.searchText.isEmpty && viewModel.filterLevel == nil else { return }
                         if let last = viewModel.filteredEntries.last {
                             proxy.scrollTo(last.id, anchor: .bottom)
                         }
@@ -152,9 +150,13 @@ struct DebugLogEntryView: View {
         }
     }
 
-    private func formatTime(_ date: Date) -> String {
+    private static let timeFormatter: DateFormatter = {
         let f = DateFormatter()
         f.dateFormat = "HH:mm:ss"
-        return f.string(from: date)
+        return f
+    }()
+
+    private func formatTime(_ date: Date) -> String {
+        Self.timeFormatter.string(from: date)
     }
 }

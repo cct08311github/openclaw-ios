@@ -43,7 +43,11 @@ actor SSEClient {
 
                 while !Task.isCancelled {
                     await self.setState(.connecting)
-                    appLog(AppLogLevel.info, LogCategory.sse, "Connecting to \(endpoint.path) (attempt \(Int(backoff))s backoff)")
+                    if backoff > 1 {
+                        appLog(AppLogLevel.info, LogCategory.sse, "Reconnecting to \(endpoint.path) (backoff \(Int(backoff))s)")
+                    } else {
+                        appLog(AppLogLevel.info, LogCategory.sse, "Connecting to \(endpoint.path)")
+                    }
 
                     do {
                         let url = self.baseURL.appendingPathComponent(endpoint.path)

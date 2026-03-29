@@ -3,7 +3,9 @@ import SwiftUI
 struct SystemView: View {
     @State private var viewModel: SystemViewModel
     @Binding var alertCount: Int
+    #if DEBUG
     @State private var showDebugLog = false
+    #endif
 
     init(apiClient: APIClient, alertCount: Binding<Int>) {
         _viewModel = State(initialValue: SystemViewModel(apiClient: apiClient))
@@ -79,9 +81,11 @@ struct SystemView: View {
                 }
                 #endif
             }
+            #if DEBUG
             .sheet(isPresented: $showDebugLog) {
                 DebugLogView()
             }
+            #endif
             .refreshable { await viewModel.load() }
             .task {
                 await viewModel.load()
