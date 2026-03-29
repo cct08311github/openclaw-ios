@@ -10,9 +10,12 @@
 		0407FC9ED972715DA6849000 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ED71CDFC44FAFE0279C39C /* Task.swift */; };
 		1A0331B3FF2456251EE773EF /* TaskHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781C16DA0E419F3FCCB5CCC /* TaskHubView.swift */; };
 		1E7446523C2CED731D45B743 /* CronJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2D4B070ECDF158E2D2A7C1 /* CronJob.swift */; };
+		27BF35F764375E4598E5C6A6 /* CommandsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE71589392ED566B35EF56 /* CommandsView.swift */; };
+		2885D71C7C241E923E024F16 /* SystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3996994EEFCE86292CABD884 /* SystemView.swift */; };
 		38DCC268BEB87A9B505E4734 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218FD84572FD6C66D75D9C4 /* DashboardView.swift */; };
 		4694801719DC588E6ED6A5BC /* ConnectivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DDCA91B6D40C91012735F0 /* ConnectivityMonitor.swift */; };
 		5184989F3518E77900A07FDF /* CronViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA5B9AD190868BC2871F76B /* CronViewModel.swift */; };
+		57BA971B002EB7971A758687 /* SystemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2FE70F5B33B6681144EDA8 /* SystemViewModel.swift */; };
 		58BDC7E4A145BA53425221AA /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D00DB488254B57FCBCF8A /* APIResponse.swift */; };
 		8E7483FDCE8BB147305CE313 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF435D3ED46B6BAE843FD1 /* ContentView.swift */; };
 		99C241137259351192165C21 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BB2697DC18FBE8CC6FDF16 /* Alert.swift */; };
@@ -40,6 +43,7 @@
 		25932F0E517698DE13D7C2F9 /* CronView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronView.swift; sourceTree = "<group>"; };
 		284F20378057999A19AE78D8 /* LogsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewModel.swift; sourceTree = "<group>"; };
 		32E38AF6E9AFEEEAB892AEFB /* OpenClawMonitor.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OpenClawMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3996994EEFCE86292CABD884 /* SystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemView.swift; sourceTree = "<group>"; };
 		42C65D2845DAA79C2B7FF426 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		49FD962CE4264F5FCF35AFF4 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		505BEC85D3FC95D1612E0160 /* LogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsView.swift; sourceTree = "<group>"; };
@@ -47,6 +51,7 @@
 		58B60F4DF5029CAA7E0CDC5B /* SSEClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEClient.swift; sourceTree = "<group>"; };
 		5C6A57BF27E65BDEF19EDA85 /* OpenClawMonitorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenClawMonitorApp.swift; sourceTree = "<group>"; };
 		64D4AFDCEAC51B2A932A93FF /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		8F2FE70F5B33B6681144EDA8 /* SystemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemViewModel.swift; sourceTree = "<group>"; };
 		93FF435D3ED46B6BAE843FD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9BA5B9AD190868BC2871F76B /* CronViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronViewModel.swift; sourceTree = "<group>"; };
 		9C2D4B070ECDF158E2D2A7C1 /* CronJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronJob.swift; sourceTree = "<group>"; };
@@ -57,6 +62,7 @@
 		EA917CEB64716FCA72AA469C /* Agent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Agent.swift; sourceTree = "<group>"; };
 		F79EF61F710CF7788BA703ED /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		F7A1175C70D96C423706D26D /* TaskHubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHubViewModel.swift; sourceTree = "<group>"; };
+		FCFE71589392ED566B35EF56 /* CommandsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -69,6 +75,14 @@
 				58B60F4DF5029CAA7E0CDC5B /* SSEClient.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		15D6F2E61D146D5F764FC552 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				FCFE71589392ED566B35EF56 /* CommandsView.swift */,
+			);
+			path = Commands;
 			sourceTree = "<group>";
 		};
 		275DDC9C8B7C6D6F6F31BFFE /* Login */ = {
@@ -117,10 +131,12 @@
 		6664482F05E2869496B13210 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				15D6F2E61D146D5F764FC552 /* Commands */,
 				75193F74B66599EC25006FF0 /* Cron */,
 				4E32AD09C6D5F411B85189DC /* Dashboard */,
 				275DDC9C8B7C6D6F6F31BFFE /* Login */,
 				285C5C29B90FDB071717897E /* Logs */,
+				912C33141FA8D85C14A4A35B /* System */,
 				9D32079380450AC2827AA100 /* TaskHub */,
 			);
 			path = Features;
@@ -153,6 +169,15 @@
 				B8ED71CDFC44FAFE0279C39C /* Task.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		912C33141FA8D85C14A4A35B /* System */ = {
+			isa = PBXGroup;
+			children = (
+				3996994EEFCE86292CABD884 /* SystemView.swift */,
+				8F2FE70F5B33B6681144EDA8 /* SystemViewModel.swift */,
+			);
+			path = System;
 			sourceTree = "<group>";
 		};
 		9D32079380450AC2827AA100 /* TaskHub */ = {
@@ -266,6 +291,7 @@
 				99C241137259351192165C21 /* Alert.swift in Sources */,
 				E1E638CC52A923DF1B318082 /* AppError.swift in Sources */,
 				C4425E08DCF0623EC081F402 /* AuthManager.swift in Sources */,
+				27BF35F764375E4598E5C6A6 /* CommandsView.swift in Sources */,
 				4694801719DC588E6ED6A5BC /* ConnectivityMonitor.swift in Sources */,
 				8E7483FDCE8BB147305CE313 /* ContentView.swift in Sources */,
 				1E7446523C2CED731D45B743 /* CronJob.swift in Sources */,
@@ -280,6 +306,8 @@
 				CC7523239E88643086548D38 /* MonitorView.swift in Sources */,
 				B98EAF4021CCF488FE8292E5 /* OpenClawMonitorApp.swift in Sources */,
 				D0C768816551D2CD6EE50F79 /* SSEClient.swift in Sources */,
+				2885D71C7C241E923E024F16 /* SystemView.swift in Sources */,
+				57BA971B002EB7971A758687 /* SystemViewModel.swift in Sources */,
 				0407FC9ED972715DA6849000 /* Task.swift in Sources */,
 				1A0331B3FF2456251EE773EF /* TaskHubView.swift in Sources */,
 				FB6A2A1A207DBF48B38DF39A /* TaskHubViewModel.swift in Sources */,

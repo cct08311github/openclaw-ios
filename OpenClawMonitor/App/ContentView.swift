@@ -35,31 +35,11 @@ struct MainTabView: View {
                 LogsView(sseClient: logsSSE)
             }
             Tab("系統", systemImage: "chart.bar") {
-                SystemPlaceholder()
+                SystemView(apiClient: apiClient)
             }
             Tab("指令", systemImage: "terminal") {
-                CommandsPlaceholder()
+                CommandsView(apiClient: apiClient)
             }
-        }
-    }
-}
-
-// MARK: - Placeholders (Phase 4-5)
-
-private struct SystemPlaceholder: View {
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView("系統狀態", systemImage: "chart.bar", description: Text("Phase 4"))
-                .navigationTitle("系統")
-        }
-    }
-}
-
-private struct CommandsPlaceholder: View {
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView("指令控制", systemImage: "terminal", description: Text("Phase 5"))
-                .navigationTitle("指令")
         }
     }
 }
