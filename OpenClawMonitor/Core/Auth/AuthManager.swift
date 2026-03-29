@@ -51,6 +51,11 @@ final class AuthManager {
                 saveToken(token)
                 self.username = response.username
                 isAuthenticated = true
+                #if DEBUG
+                appLog(.info, .auth, "Login success: \(response.username ?? "?")")
+                #else
+                appLog(.info, .auth, "Login success")
+                #endif
             } else {
                 self.error = response.error ?? "登入失敗"
             }
@@ -69,6 +74,7 @@ final class AuthManager {
     }
 
     func handleUnauthorized() {
+        appLog(.warning, .auth, "Session expired — redirecting to login")
         clearToken()
         isAuthenticated = false
         username = nil
