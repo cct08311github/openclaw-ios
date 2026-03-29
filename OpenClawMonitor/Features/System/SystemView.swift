@@ -2,9 +2,11 @@ import SwiftUI
 
 struct SystemView: View {
     @State private var viewModel: SystemViewModel
+    @Binding var alertCount: Int
 
-    init(apiClient: APIClient) {
+    init(apiClient: APIClient, alertCount: Binding<Int>) {
         _viewModel = State(initialValue: SystemViewModel(apiClient: apiClient))
+        _alertCount = alertCount
     }
 
     var body: some View {
@@ -68,7 +70,13 @@ struct SystemView: View {
             }
             .navigationTitle("系統")
             .refreshable { await viewModel.load() }
-            .task { await viewModel.load() }
+            .task {
+                await viewModel.load()
+                alertCount = viewModel.alerts.count
+            }
+            .onChange(of: viewModel.alerts.count) { _, newCount in
+                alertCount = newCount
+            }
         }
     }
 

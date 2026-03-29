@@ -26,6 +26,10 @@ struct MainTabView: View {
     let dashboardSSE: SSEClient
     let logsSSE: SSEClient
 
+    @Environment(\.scenePhase) private var scenePhase
+    @State private var alertCount = 0
+    @State private var backgroundTask: Task<Void, Never>?
+
     var body: some View {
         TabView {
             Tab("監控", systemImage: "rectangle.grid.2x2") {
@@ -35,10 +39,27 @@ struct MainTabView: View {
                 LogsView(sseClient: logsSSE)
             }
             Tab("系統", systemImage: "chart.bar") {
-                SystemView(apiClient: apiClient)
+                SystemView(apiClient: apiClient, alertCount: $alertCount)
             }
+            .badge(alertCount)
             Tab("指令", systemImage: "terminal") {
                 CommandsView(apiClient: apiClient)
+            }
+        }
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            switch newPhase {
+            case .background:
+                backgroundTask?.cancel()
+                backgroundTask = Task {
+                    await dashboardSSE.disconnect()
+                    await logsSSE.disconnect()
+                }
+            case .active where oldPhase == .background:
+                backgroundTask?.cancel()
+                backgroundTask = nil
+                // Reconnect is handled by onAppear in each view
+            default:
+                break
             }
         }
     }

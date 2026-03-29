@@ -12,9 +12,12 @@ final class DashboardViewModel {
     private let sseClient: SSEClient
     private var sseTask: Task<Void, Never>?
 
+    private static let cacheKey = "dashboard_payload_cache_v1"
+
     init(apiClient: APIClient, sseClient: SSEClient) {
         self.apiClient = apiClient
         self.sseClient = sseClient
+        restoreFromCache()
     }
 
     func startStreaming() {
@@ -42,10 +45,28 @@ final class DashboardViewModel {
             agents = payload.agents ?? []
             summary = payload.summary
             error = nil
+            saveToCache(payload)
         } catch {
             self.error = error.localizedDescription
         }
     }
+
+    // MARK: - Cache (UserDefaults)
+
+    private func saveToCache(_ payload: DashboardPayload) {
+        if let data = try? JSONEncoder().encode(payload) {
+            UserDefaults.standard.set(data, forKey: Self.cacheKey)
+        }
+    }
+
+    private func restoreFromCache() {
+        guard let data = UserDefaults.standard.data(forKey: Self.cacheKey),
+              let payload = try? JSONDecoder().decode(DashboardPayload.self, from: data) else { return }
+        agents = payload.agents ?? []
+        summary = payload.summary
+    }
+
+    // MARK: - Private
 
     private func parseDashboardPayload(_ data: String) {
         guard let jsonData = data.data(using: .utf8) else { return }
@@ -54,8 +75,9 @@ final class DashboardViewModel {
             agents = payload.agents ?? agents
             if let s = payload.summary { summary = s }
             error = nil
+            saveToCache(payload)
         } catch {
-            // Partial payload — ignore decode errors for non-standard events
+            // Partial payload — ignore decode errors
         }
     }
 

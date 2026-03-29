@@ -20,6 +20,7 @@
 		8E7483FDCE8BB147305CE313 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF435D3ED46B6BAE843FD1 /* ContentView.swift */; };
 		99C241137259351192165C21 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BB2697DC18FBE8CC6FDF16 /* Alert.swift */; };
 		9B3B996E2B2C999C870BBAFB /* LogsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284F20378057999A19AE78D8 /* LogsViewModel.swift */; };
+		9FAEEB61C2FAB82D7FF507D6 /* AgentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3534A8CE6AD27567A3CB1 /* AgentDetailView.swift */; };
 		A0708FE2DAADA1A20DBC5EED /* LogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505BEC85D3FC95D1612E0160 /* LogsView.swift */; };
 		AB43853830538B94413B6ADB /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D4AFDCEAC51B2A932A93FF /* APIClient.swift */; };
 		AC6F7EC5002162F2BFD8CD01 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EFB1AAC58031140EF401AA /* Endpoint.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		05EFB1AAC58031140EF401AA /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		0781C16DA0E419F3FCCB5CCC /* TaskHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHubView.swift; sourceTree = "<group>"; };
+		0AD3534A8CE6AD27567A3CB1 /* AgentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentDetailView.swift; sourceTree = "<group>"; };
 		1EE155DF14FCAB285DDA4A57 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2070C28765B27D51E456B0E5 /* MonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorView.swift; sourceTree = "<group>"; };
 		25932F0E517698DE13D7C2F9 /* CronView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		4E32AD09C6D5F411B85189DC /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				0AD3534A8CE6AD27567A3CB1 /* AgentDetailView.swift */,
 				5218FD84572FD6C66D75D9C4 /* DashboardView.swift */,
 				49FD962CE4264F5FCF35AFF4 /* DashboardViewModel.swift */,
 				2070C28765B27D51E456B0E5 /* MonitorView.swift */,
@@ -299,6 +302,7 @@
 				AB43853830538B94413B6ADB /* APIClient.swift in Sources */,
 				58BDC7E4A145BA53425221AA /* APIResponse.swift in Sources */,
 				F484861D055357456F346EB7 /* Agent.swift in Sources */,
+				9FAEEB61C2FAB82D7FF507D6 /* AgentDetailView.swift in Sources */,
 				99C241137259351192165C21 /* Alert.swift in Sources */,
 				E1E638CC52A923DF1B318082 /* AppError.swift in Sources */,
 				C4425E08DCF0623EC081F402 /* AuthManager.swift in Sources */,
