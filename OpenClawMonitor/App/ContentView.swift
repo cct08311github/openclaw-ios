@@ -29,7 +29,7 @@ struct MainTabView: View {
     var body: some View {
         TabView {
             Tab("監控", systemImage: "rectangle.grid.2x2") {
-                DashboardView(apiClient: apiClient, sseClient: dashboardSSE)
+                MonitorView(apiClient: apiClient, sseClient: dashboardSSE)
             }
             Tab("日誌", systemImage: "text.justify.left") {
                 LogsView(sseClient: logsSSE)

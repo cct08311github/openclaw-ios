@@ -8,39 +8,33 @@ struct DashboardView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 16) {
-                    // Connection status
-                    ConnectionBadge(state: viewModel.sseState)
+        ScrollView {
+            VStack(spacing: 16) {
+                ConnectionBadge(state: viewModel.sseState)
 
-                    // Summary cards
-                    if let summary = viewModel.summary {
-                        SummaryCardsView(summary: summary)
-                    }
+                if let summary = viewModel.summary {
+                    SummaryCardsView(summary: summary)
+                }
 
-                    // Agent list
-                    LazyVStack(spacing: 8) {
-                        ForEach(viewModel.agents) { agent in
-                            AgentCardView(agent: agent)
-                        }
-                    }
-
-                    if viewModel.agents.isEmpty && viewModel.error == nil {
-                        ContentUnavailableView("載入中...", systemImage: "arrow.trianglehead.2.clockwise")
-                    }
-
-                    if let error = viewModel.error {
-                        ContentUnavailableView("錯誤", systemImage: "exclamationmark.triangle", description: Text(error))
+                LazyVStack(spacing: 8) {
+                    ForEach(viewModel.agents) { agent in
+                        AgentCardView(agent: agent)
                     }
                 }
-                .padding()
+
+                if viewModel.agents.isEmpty && viewModel.error == nil {
+                    ContentUnavailableView("載入中...", systemImage: "arrow.trianglehead.2.clockwise")
+                }
+
+                if let error = viewModel.error {
+                    ContentUnavailableView("錯誤", systemImage: "exclamationmark.triangle", description: Text(error))
+                }
             }
-            .navigationTitle("監控")
-            .refreshable { await viewModel.refresh() }
-            .onAppear { viewModel.startStreaming() }
-            .onDisappear { viewModel.stopStreaming() }
+            .padding()
         }
+        .refreshable { await viewModel.refresh() }
+        .onAppear { viewModel.startStreaming() }
+        .onDisappear { viewModel.stopStreaming() }
     }
 }
 
