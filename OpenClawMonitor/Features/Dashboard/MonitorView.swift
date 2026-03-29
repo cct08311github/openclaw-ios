@@ -7,8 +7,8 @@ enum MonitorSection: String, CaseIterable {
 }
 
 struct MonitorView: View {
-    let apiClient: APIClient
-    let sseClient: SSEClient
+    let apiClient: any APIClientProtocol
+    let sseClient: any SSEClientProtocol
     @State private var selectedSection: MonitorSection = .agents
 
     var body: some View {

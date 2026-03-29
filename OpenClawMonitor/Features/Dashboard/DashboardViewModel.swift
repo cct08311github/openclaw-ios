@@ -8,13 +8,13 @@ final class DashboardViewModel {
     var sseState: SSEConnectionState = .disconnected
     var error: String?
 
-    private let apiClient: APIClient
-    private let sseClient: SSEClient
+    private let apiClient: any APIClientProtocol
+    private let sseClient: any SSEClientProtocol
     private var sseTask: Task<Void, Never>?
 
     private static let cacheKey = "dashboard_payload_cache_v1"
 
-    init(apiClient: APIClient, sseClient: SSEClient) {
+    init(apiClient: any APIClientProtocol, sseClient: any SSEClientProtocol) {
         self.apiClient = apiClient
         self.sseClient = sseClient
         restoreFromCache()
@@ -82,6 +82,6 @@ final class DashboardViewModel {
     }
 
     private func updateSSEState() async {
-        sseState = await sseClient.state
+        sseState = await sseClient.getState()
     }
 }

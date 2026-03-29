@@ -3,7 +3,7 @@ import SwiftUI
 struct TaskHubView: View {
     @State private var viewModel: TaskHubViewModel
 
-    init(apiClient: APIClient) {
+    init(apiClient: any APIClientProtocol) {
         _viewModel = State(initialValue: TaskHubViewModel(apiClient: apiClient))
     }
 

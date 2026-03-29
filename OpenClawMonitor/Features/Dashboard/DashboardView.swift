@@ -2,9 +2,9 @@ import SwiftUI
 
 struct DashboardView: View {
     @State private var viewModel: DashboardViewModel
-    let apiClient: APIClient
+    let apiClient: any APIClientProtocol
 
-    init(apiClient: APIClient, sseClient: SSEClient) {
+    init(apiClient: any APIClientProtocol, sseClient: any SSEClientProtocol) {
         self.apiClient = apiClient
         _viewModel = State(initialValue: DashboardViewModel(apiClient: apiClient, sseClient: sseClient))
     }

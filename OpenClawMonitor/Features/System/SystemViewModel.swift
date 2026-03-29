@@ -32,9 +32,9 @@ final class SystemViewModel {
     var isLoading = false
     var error: String?
 
-    private let apiClient: APIClient
+    private let apiClient: any APIClientProtocol
 
-    init(apiClient: APIClient) {
+    init(apiClient: any APIClientProtocol) {
         self.apiClient = apiClient
     }
 

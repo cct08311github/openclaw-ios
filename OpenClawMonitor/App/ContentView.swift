@@ -3,9 +3,9 @@ import SwiftUI
 struct ContentView: View {
     @Environment(AuthManager.self) private var auth
     @Environment(ConnectivityMonitor.self) private var connectivity
-    let apiClient: APIClient
-    let dashboardSSE: SSEClient
-    let logsSSE: SSEClient
+    let apiClient: any APIClientProtocol
+    let dashboardSSE: any SSEClientProtocol
+    let logsSSE: any SSEClientProtocol
 
     var body: some View {
         if auth.isAuthenticated {
@@ -22,9 +22,9 @@ struct ContentView: View {
 }
 
 struct MainTabView: View {
-    let apiClient: APIClient
-    let dashboardSSE: SSEClient
-    let logsSSE: SSEClient
+    let apiClient: any APIClientProtocol
+    let dashboardSSE: any SSEClientProtocol
+    let logsSSE: any SSEClientProtocol
 
     @Environment(\.scenePhase) private var scenePhase
     @State private var alertCount = 0

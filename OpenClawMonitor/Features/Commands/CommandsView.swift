@@ -25,9 +25,9 @@ final class CommandsViewModel {
     var chatHistory: [ChatEntry] = []
     var isLoadingHistory = false
 
-    private let apiClient: APIClient
+    private let apiClient: any APIClientProtocol
 
-    init(apiClient: APIClient) {
+    init(apiClient: any APIClientProtocol) {
         self.apiClient = apiClient
     }
 
@@ -95,9 +95,9 @@ final class CommandsViewModel {
 struct CommandsView: View {
     @State private var viewModel: CommandsViewModel
     @State private var confirmRestart = false
-    let apiClient: APIClient
+    let apiClient: any APIClientProtocol
 
-    init(apiClient: APIClient) {
+    init(apiClient: any APIClientProtocol) {
         self.apiClient = apiClient
         _viewModel = State(initialValue: CommandsViewModel(apiClient: apiClient))
     }

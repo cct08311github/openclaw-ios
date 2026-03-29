@@ -29,7 +29,7 @@ final class LogsViewModel {
     var searchText = ""
     var errorOnly = false
 
-    private let sseClient: SSEClient
+    private let sseClient: any SSEClientProtocol
     private var sseTask: Task<Void, Never>?
     private static let maxLines = 500
 
@@ -44,7 +44,7 @@ final class LogsViewModel {
         return result
     }
 
-    init(sseClient: SSEClient) {
+    init(sseClient: any SSEClientProtocol) {
         self.sseClient = sseClient
     }
 
@@ -96,6 +96,6 @@ final class LogsViewModel {
     }
 
     private func updateSSEState() async {
-        sseState = await sseClient.state
+        sseState = await sseClient.getState()
     }
 }

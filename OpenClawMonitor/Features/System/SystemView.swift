@@ -7,7 +7,7 @@ struct SystemView: View {
     @State private var showDebugLog = false
     #endif
 
-    init(apiClient: APIClient, alertCount: Binding<Int>) {
+    init(apiClient: any APIClientProtocol, alertCount: Binding<Int>) {
         _viewModel = State(initialValue: SystemViewModel(apiClient: apiClient))
         _alertCount = alertCount
     }
