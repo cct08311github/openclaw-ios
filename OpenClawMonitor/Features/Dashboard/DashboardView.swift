@@ -113,6 +113,8 @@ struct SummaryCard: View {
         }
         .padding(12)
         .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 12))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(title): \(value)")
     }
 }
 
@@ -149,6 +151,8 @@ struct AgentCardView: View {
         }
         .padding(12)
         .background(.quaternary.opacity(0.3), in: RoundedRectangle(cornerRadius: 10))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(agent.label ?? agent.name), 狀態: \(agent.status.rawValue)")
     }
 }
 

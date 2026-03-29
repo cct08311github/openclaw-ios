@@ -33,6 +33,7 @@ struct CronView: View {
         )) {
             if let job = confirmRun {
                 Button("執行 \(job.name ?? job.id)") {
+                    Haptics.medium()
                     Task { await viewModel.run(id: job.id) }
                 }
             }
@@ -44,6 +45,7 @@ struct CronView: View {
         )) {
             if let job = confirmDelete {
                 Button("刪除 \(job.name ?? job.id)", role: .destructive) {
+                    Haptics.warning()
                     Task { await viewModel.delete(id: job.id) }
                 }
             }

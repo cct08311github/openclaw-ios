@@ -130,6 +130,7 @@ struct CommandsView: View {
             .navigationTitle("指令")
             .alert("確定重啟 Gateway？", isPresented: $confirmRestart) {
                 Button("重啟", role: .destructive) {
+                    Haptics.warning()
                     Task { await viewModel.execute(command: "restart") }
                 }
                 Button("取消", role: .cancel) {}

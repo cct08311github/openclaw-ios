@@ -42,6 +42,7 @@ struct LoginView: View {
                     }
 
                     Button {
+                        Haptics.light()
                         Task { await auth.login(username: username, password: password) }
                     } label: {
                         if auth.isLoading {
