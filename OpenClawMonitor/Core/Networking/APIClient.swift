@@ -139,6 +139,17 @@ private final class TrustAllDelegate: NSObject, URLSessionDelegate {
               let serverTrust = challenge.protectionSpace.serverTrust else {
             return (.performDefaultHandling, nil)
         }
-        return (.useCredential, URLCredential(trust: serverTrust))
+        // Only skip certificate validation for known development hosts.
+        // In production, this should use certificate pinning or legitimate CA.
+        let host = challenge.protectionSpace.host
+        if isDevelopmentHost(host) {
+            return (.useCredential, URLCredential(trust: serverTrust))
+        }
+        return (.performDefaultHandling, nil)
+    }
+
+    private func isDevelopmentHost(_ host: String) -> Bool {
+        let developmentHosts = ["localhost", "127.0.0.1", "100.94.135.81"]
+        return developmentHosts.contains(host) || host.hasSuffix(".local")
     }
 }

@@ -3,8 +3,15 @@ import SwiftUI
 @main
 struct OpenClawMonitorApp: App {
     // MARK: - Configuration
-    // TODO: Make this configurable via Settings screen
-    private static let serverURL = URL(string: "https://100.94.135.81:3001")!
+    // Server URL loaded from Info.plist (OPENCLAW_SERVER_URL key) with fallback for local dev.
+    // For production: set OPENCLAW_SERVER_URL in Info.plist or implement Settings screen.
+    private static let serverURL: URL = {
+        if let urlString = Bundle.main.object(forInfoDictionaryKey: "OPENCLAW_SERVER_URL") as? String,
+           let url = URL(string: urlString) {
+            return url
+        }
+        return URL(string: "https://100.94.135.81:3001")!
+    }()
 
     // MARK: - Dependencies
     @State private var apiClient: APIClient
