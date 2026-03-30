@@ -22,7 +22,7 @@ actor SSEClient: SSEClientProtocol {
     private let baseURL: URL
     private let tokenProvider: @Sendable () -> String?
     private var task: Task<Void, Never>?
-    private var urlSessionTask: URLSessionDataTask?
+    private var currentSession: URLSession?
 
     private(set) var state: SSEConnectionState = .disconnected
 
@@ -32,6 +32,10 @@ actor SSEClient: SSEClientProtocol {
     init(baseURL: URL, tokenProvider: @escaping @Sendable () -> String?) {
         self.baseURL = baseURL
         self.tokenProvider = tokenProvider
+    }
+
+    private func setSession(_ session: URLSession?) {
+        currentSession = session
     }
 
     /// Connect to an SSE endpoint and yield events as an AsyncStream.
@@ -68,6 +72,7 @@ actor SSEClient: SSEClientProtocol {
                         config.timeoutIntervalForRequest = self.heartbeatTimeout
                         config.httpShouldSetCookies = false
                         let session = URLSession(configuration: config, delegate: SSETrustDelegate(), delegateQueue: nil)
+                        await self.setSession(session)
 
                         let (bytes, response) = try await session.bytes(for: request)
 
@@ -123,7 +128,7 @@ actor SSEClient: SSEClientProtocol {
                     } catch is CancellationError {
                         break
                     } catch {
-                        // Connection failed or dropped
+                        appLog(AppLogLevel.warning, LogCategory.sse, "SSE connection error")
                     }
 
                     await self.setState(.disconnected)
@@ -150,6 +155,8 @@ actor SSEClient: SSEClientProtocol {
     func disconnect() {
         task?.cancel()
         task = nil
+        currentSession?.invalidateAndCancel()
+        currentSession = nil
         state = .disconnected
     }
 
