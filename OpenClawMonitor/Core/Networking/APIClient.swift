@@ -15,11 +15,15 @@ final class APIClient: APIClientProtocol, @unchecked Sendable {
     init(baseURL: URL) {
         self.baseURL = baseURL
 
-        // Trust self-signed certs for Tailscale/mkcert
+        // Trust self-signed certs for Tailscale/mkcert (DEBUG only)
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 10
         config.httpShouldSetCookies = false
+        #if DEBUG
         self.session = URLSession(configuration: config, delegate: TrustAllDelegate(), delegateQueue: nil)
+        #else
+        self.session = URLSession(configuration: config, delegate: nil, delegateQueue: nil)
+        #endif
     }
 
     func setTokenProvider(_ provider: @escaping @Sendable () -> String?) {
@@ -128,8 +132,15 @@ private extension URLError {
     }
 }
 
-// MARK: - SSL Trust Delegate (for mkcert / self-signed certs)
+// MARK: - SSL Trust Delegate
+// DEBUG: accepts self-signed certs for localhost/mkcert/Tailscale dev environments
+// RELEASE: delegates to system default CA validation (no custom trust)
 
+// In production, implement Certificate Pinning by overriding:
+//   1. Extract server certificate public key
+//   2. Compare against pinned hash
+//   3. Reject if mismatch
+#if DEBUG
 private final class TrustAllDelegate: NSObject, URLSessionDelegate {
     func urlSession(
         _ session: URLSession,
@@ -139,8 +150,6 @@ private final class TrustAllDelegate: NSObject, URLSessionDelegate {
               let serverTrust = challenge.protectionSpace.serverTrust else {
             return (.performDefaultHandling, nil)
         }
-        // Only skip certificate validation for known development hosts.
-        // In production, this should use certificate pinning or legitimate CA.
         let host = challenge.protectionSpace.host
         if isDevelopmentHost(host) {
             return (.useCredential, URLCredential(trust: serverTrust))
@@ -153,3 +162,4 @@ private final class TrustAllDelegate: NSObject, URLSessionDelegate {
         return developmentHosts.contains(host) || host.hasSuffix(".local")
     }
 }
+#endif
