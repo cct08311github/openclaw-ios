@@ -74,7 +74,7 @@ actor SSEClient: SSEClientProtocol {
                         #if DEBUG
                         let session = URLSession(configuration: config, delegate: SSETrustDelegate(), delegateQueue: nil)
                         #else
-                        let session = URLSession(configuration: config, delegate: nil, delegateQueue: nil)
+                        let session = URLSession(configuration: config, delegate: ProductionSecurityDelegate(), delegateQueue: nil)
                         #endif
                         await self.setSession(session)
 
