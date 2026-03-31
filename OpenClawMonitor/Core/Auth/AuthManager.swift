@@ -216,15 +216,13 @@ final class AuthManager {
                 #endif
             } else {
                 recordFailedLogin()
-                self.error = response.error ?? "登入失敗"
+                // Generic message to prevent account enumeration (Issue #SEC-001)
+                self.error = "帳號或密碼錯誤"
             }
-        } catch let appError as AppError {
-            recordFailedLogin()
-            self.error = appError.localizedDescription
         } catch {
             recordFailedLogin()
-            self.error = error.localizedDescription
-        }
+            // Generic message — do not leak network/server error details
+            self.error = "登入失敗，請稍後再試"
     }
 
     func logout() async {

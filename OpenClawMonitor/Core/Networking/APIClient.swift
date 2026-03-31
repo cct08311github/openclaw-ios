@@ -201,10 +201,11 @@ private final class ProductionSecurityDelegate: NSObject, URLSessionDelegate {
 
         let host = challenge.protectionSpace.host
 
-        // If no pins configured for this host, fall back to system validation (failsafe)
+        // If no pins configured for this host, reject the connection.
+        // This is a intentional secure default — unknown hosts must not bypass pinning.
         guard let pins = pinnedHosts[host], !pins.isEmpty else {
-            // No pins configured — delegate to system CA store
-            return (.performDefaultHandling, nil)
+            appLog(.error, .network, "CertificatePins: no pin configured for \(host) — rejecting")
+            return (.cancelAuthenticationChallenge, nil)
         }
 
         // Verify certificate chain and extract leaf public key hash
