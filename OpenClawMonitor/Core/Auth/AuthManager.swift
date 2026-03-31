@@ -33,9 +33,22 @@ final class AuthManager {
     var username: String?
     var isLoading = false
     var error: String?
+    var isLockedOut = false
+    var lockoutSecondsRemaining = 0
 
     // Biometric authentication
     private var biometricSettings = BiometricSettings.load()
+
+    // Login lockout state (persisted in UserDefaults)
+    private static let lockoutKey = "login-lockout"
+    private static let failedAttemptsKey = "login-failed-attempts"
+    private let maxAttempts = 5
+    private let lockoutDurationSeconds = 15 * 60  // 15 minutes
+
+    private struct LockoutState: Codable {
+        var until: Date
+        var attempts: Int
+    }
     var isBiometricEnabled: Bool {
         get { biometricSettings.isEnabled }
         set {
@@ -50,6 +63,54 @@ final class AuthManager {
     private let apiClient: APIClient
     private nonisolated static let keychainService = "com.openclaw.monitor"
     private nonisolated static let keychainAccount = "session-token"
+
+    // MARK: - Login Lockout
+
+    /// Check if currently in lockout period and update UI state
+    private func refreshLockoutState() {
+        guard let data = UserDefaults.standard.data(forKey: Self.lockoutKey),
+              let state = try? JSONDecoder().decode(LockoutState.self, from: data) else {
+            isLockedOut = false
+            lockoutSecondsRemaining = 0
+            return
+        }
+        if Date() < state.until {
+            isLockedOut = true
+            lockoutSecondsRemaining = Int(state.until.timeIntervalSinceNow)
+        } else {
+            // Lockout expired — reset
+            isLockedOut = false
+            lockoutSecondsRemaining = 0
+            UserDefaults.standard.removeObject(forKey: Self.lockoutKey)
+        }
+    }
+
+    private func recordFailedLogin() {
+        let state: LockoutState
+        if let existing = try? JSONDecoder().decode(LockoutState.self, from: UserDefaults.standard.data(forKey: Self.lockoutKey) ?? Data()),
+           Date() < existing.until {
+            // Already locked out — don't increment further
+            state = existing
+        } else {
+            let attempts = (try? JSONDecoder().decode(LockoutState.self, from: UserDefaults.standard.data(forKey: Self.lockoutKey) ?? Data()))?.attempts ?? 0
+            let newAttempts = attempts + 1
+            if newAttempts >= maxAttempts {
+                state = LockoutState(until: Date().addingTimeInterval(TimeInterval(lockoutDurationSeconds)), attempts: newAttempts)
+            } else {
+                state = LockoutState(until: Date(), attempts: newAttempts)
+            }
+        }
+        if let data = try? JSONEncoder().encode(state) {
+            UserDefaults.standard.set(data, forKey: Self.lockoutKey)
+        }
+        refreshLockoutState()
+    }
+
+    private func clearLockout() {
+        UserDefaults.standard.removeObject(forKey: Self.lockoutKey)
+        isLockedOut = false
+        lockoutSecondsRemaining = 0
+    }
 
     init(apiClient: APIClient) {
         self.apiClient = apiClient
@@ -131,6 +192,12 @@ final class AuthManager {
     }
 
     func login(username: String, password: String) async {
+        refreshLockoutState()
+        if isLockedOut {
+            error = "登入失敗次數過多，請 \(lockoutSecondsRemaining / 60) 分鐘後再試"
+            return
+        }
+
         isLoading = true
         error = nil
         defer { isLoading = false }
@@ -141,17 +208,21 @@ final class AuthManager {
                 saveToken(token)
                 self.username = response.username
                 isAuthenticated = true
+                clearLockout()
                 #if DEBUG
                 appLog(.info, .auth, "Login success: \(response.username ?? "?")")
                 #else
                 appLog(.info, .auth, "Login success")
                 #endif
             } else {
+                recordFailedLogin()
                 self.error = response.error ?? "登入失敗"
             }
         } catch let appError as AppError {
+            recordFailedLogin()
             self.error = appError.localizedDescription
         } catch {
+            recordFailedLogin()
             self.error = error.localizedDescription
         }
     }

@@ -71,7 +71,11 @@ actor SSEClient: SSEClientProtocol {
                         let config = URLSessionConfiguration.default
                         config.timeoutIntervalForRequest = self.heartbeatTimeout
                         config.httpShouldSetCookies = false
+                        #if DEBUG
                         let session = URLSession(configuration: config, delegate: SSETrustDelegate(), delegateQueue: nil)
+                        #else
+                        let session = URLSession(configuration: config, delegate: ProductionSecurityDelegate(), delegateQueue: nil)
+                        #endif
                         await self.setSession(session)
 
                         let (bytes, response) = try await session.bytes(for: request)
@@ -170,6 +174,9 @@ actor SSEClient: SSEClientProtocol {
 }
 
 // SSL trust delegate for SSE connections (mkcert / Tailscale)
+// DEBUG: accepts self-signed certs for dev environments
+// RELEASE: delegates to system default CA validation (no custom trust)
+#if DEBUG
 private final class SSETrustDelegate: NSObject, URLSessionDelegate {
     func urlSession(
         _ session: URLSession,
@@ -191,3 +198,4 @@ private final class SSETrustDelegate: NSObject, URLSessionDelegate {
         return developmentHosts.contains(host) || host.hasSuffix(".local")
     }
 }
+#endif

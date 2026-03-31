@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+		Certificate Pins Configuration
+
+		Format: hostname -> [sha256/Base64EncodedSPKIFingerprint==]
+
+		How to obtain the pin:
+		  1. Extract server's leaf certificate
+		  2. Get its Subject Public Key Info (SPKI) as DER
+		  3. Compute SHA-256 hash of SPKI
+		  4. Base64-encode the hash
+		  5. Prefix with "sha256/", suffix with "=="
+
+		Example (openssl):
+		  echo | openssl s_client -connect api.example.com:443 | \
+		    openssl x509 -noout -pubkey | \
+		    openssl ec -pubin -outform DER | \
+		    openssl sha256 -binary | base64
+
+		Multiple pins can be listed for the same host (e.g., old + new cert during rotation).
+		Leave empty array [] to skip pinning for that host (delegates to system CA).
+	-->
+	<key>api.example.com</key>
+	<array>
+		<string>sha256/REPLACE_WITH_ACTUAL_PIN_BASE64==</string>
+	</array>
+</dict>
+</plist>

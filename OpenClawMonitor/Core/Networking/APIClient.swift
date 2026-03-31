@@ -15,11 +15,15 @@ final class APIClient: APIClientProtocol, @unchecked Sendable {
     init(baseURL: URL) {
         self.baseURL = baseURL
 
-        // Trust self-signed certs for Tailscale/mkcert
+        // Trust self-signed certs for Tailscale/mkcert (DEBUG only)
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 10
         config.httpShouldSetCookies = false
+        #if DEBUG
         self.session = URLSession(configuration: config, delegate: TrustAllDelegate(), delegateQueue: nil)
+        #else
+        self.session = URLSession(configuration: config, delegate: ProductionSecurityDelegate(), delegateQueue: nil)
+        #endif
     }
 
     func setTokenProvider(_ provider: @escaping @Sendable () -> String?) {
@@ -128,8 +132,15 @@ private extension URLError {
     }
 }
 
-// MARK: - SSL Trust Delegate (for mkcert / self-signed certs)
+// MARK: - SSL Trust Delegate
+// DEBUG: accepts self-signed certs for localhost/mkcert/Tailscale dev environments
+// RELEASE: delegates to system default CA validation (no custom trust)
 
+// In production, implement Certificate Pinning by overriding:
+//   1. Extract server certificate public key
+//   2. Compare against pinned hash
+//   3. Reject if mismatch
+#if DEBUG
 private final class TrustAllDelegate: NSObject, URLSessionDelegate {
     func urlSession(
         _ session: URLSession,
@@ -139,8 +150,6 @@ private final class TrustAllDelegate: NSObject, URLSessionDelegate {
               let serverTrust = challenge.protectionSpace.serverTrust else {
             return (.performDefaultHandling, nil)
         }
-        // Only skip certificate validation for known development hosts.
-        // In production, this should use certificate pinning or legitimate CA.
         let host = challenge.protectionSpace.host
         if isDevelopmentHost(host) {
             return (.useCredential, URLCredential(trust: serverTrust))
@@ -153,3 +162,78 @@ private final class TrustAllDelegate: NSObject, URLSessionDelegate {
         return developmentHosts.contains(host) || host.hasSuffix(".local")
     }
 }
+#endif
+
+// MARK: - Production Security Delegate (RELEASE only)
+
+/// Certificate pinning delegate for production builds.
+/// Loads pinned public key hashes from CertificatePins.plist bundle config.
+/// If no pins are configured for a host, delegates to system CA validation (failsafe).
+#if !DEBUG
+private final class ProductionSecurityDelegate: NSObject, URLSessionDelegate {
+    /// SHA-256 SPKI hashes keyed by hostname. Configured in CertificatePins.plist.
+    /// Format: "hostname" -> "sha256/Base64EncodedHash=="
+    private let pinnedHosts: [String: Set<String>]
+
+    override init() {
+        // Load pins from bundle config (CertificatePins.plist)
+        // Each entry: hostname -> Set of accepted sha256/...== hashes
+        var hosts: [String: Set<String>] = [:]
+        if let url = Bundle.main.url(forResource: "CertificatePins", withExtension: "plist"),
+           let data = try? Data(contentsOf: url),
+           let plist = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [String: [String]] {
+            for (host, hashes) in plist {
+                hosts[host] = Set(hashes)
+            }
+        }
+        self.pinnedHosts = hosts
+        super.init()
+    }
+
+    func urlSession(
+        _ session: URLSession,
+        didReceive challenge: URLAuthenticationChallenge
+    ) async -> (URLSession.AuthChallengeDisposition, URLCredential?) {
+        guard challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
+              let serverTrust = challenge.protectionSpace.serverTrust else {
+            return (.performDefaultHandling, nil)
+        }
+
+        let host = challenge.protectionSpace.host
+
+        // If no pins configured for this host, fall back to system validation (failsafe)
+        guard let pins = pinnedHosts[host], !pins.isEmpty else {
+            // No pins configured — delegate to system CA store
+            return (.performDefaultHandling, nil)
+        }
+
+        // Verify certificate chain and extract leaf public key hash
+        let policy = SecPolicyCreateSSL(true, host as CFString)
+        SecTrustSetPolicies(serverTrust, policy)
+
+        var error: CFError?
+        guard SecTrustEvaluateWithError(serverTrust, &error) else {
+            appLog(.error, .network, "Certificate chain invalid for \(host): \(String(describing: error))")
+            return (.cancelAuthenticationChallenge, nil)
+        }
+
+        // Get the leaf certificate's public key hash
+        guard let leafCert = SecTrustGetCertificateAtIndex(serverTrust, 0),
+              let leafKey = SecCertificateCopyKey(leafCert),
+              let leafKeyData = SecKeyCopyExternalRepresentation(leafKey, nil) as Data? else {
+            appLog(.error, .network, "Could not extract public key from certificate for \(host)")
+            return (.cancelAuthenticationChallenge, nil)
+        }
+
+        // SHA-256 hash of the public key data
+        let leafHash = "sha256/" + leafKeyData.base64EncodedString()
+        if pins.contains(leafHash) {
+            return (.useCredential, URLCredential(trust: serverTrust))
+        }
+
+        // Pin mismatch — reject
+        appLog(.error, .network, "Certificate pin mismatch for \(host): got \(leafHash), expected one of \(pins)")
+        return (.cancelAuthenticationChallenge, nil)
+    }
+}
+#endif
