@@ -11,12 +11,14 @@ final class DashboardViewModel {
     private let apiClient: any APIClientProtocol
     private let sseClient: any SSEClientProtocol
     private var sseTask: Task<Void, Never>?
+    private var onUnauthorized: (() -> Void)?
 
     private static let cacheKey = "dashboard_payload_cache_v1"
 
-    init(apiClient: any APIClientProtocol, sseClient: any SSEClientProtocol) {
+    init(apiClient: any APIClientProtocol, sseClient: any SSEClientProtocol, onUnauthorized: (() -> Void)? = nil) {
         self.apiClient = apiClient
         self.sseClient = sseClient
+        self.onUnauthorized = onUnauthorized
         restoreFromCache()
     }
 
@@ -26,6 +28,10 @@ final class DashboardViewModel {
             let stream = await sseClient.connect(endpoint: .dashboardStream)
             for await event in stream {
                 await updateSSEState()
+                if event.event == "unauthorized" {
+                    self.onUnauthorized?()
+                    continue
+                }
                 guard event.event == nil || event.event == "message" else { continue }
                 parseDashboardPayload(event.data)
             }

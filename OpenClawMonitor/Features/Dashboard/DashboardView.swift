@@ -4,9 +4,9 @@ struct DashboardView: View {
     @State private var viewModel: DashboardViewModel
     let apiClient: any APIClientProtocol
 
-    init(apiClient: any APIClientProtocol, sseClient: any SSEClientProtocol) {
+    init(apiClient: any APIClientProtocol, sseClient: any SSEClientProtocol, onUnauthorized: @escaping () -> Void = {}) {
         self.apiClient = apiClient
-        _viewModel = State(initialValue: DashboardViewModel(apiClient: apiClient, sseClient: sseClient))
+        _viewModel = State(initialValue: DashboardViewModel(apiClient: apiClient, sseClient: sseClient, onUnauthorized: onUnauthorized))
     }
 
     var body: some View {

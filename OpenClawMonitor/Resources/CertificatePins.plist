@@ -22,10 +22,15 @@
 
 		Multiple pins can be listed for the same host (e.g., old + new cert during rotation).
 		Leave empty array [] to skip pinning for that host (delegates to system CA).
+		NO entry = REJECT connection (secure default — do NOT fall back to system CA).
 	-->
-	<key>api.example.com</key>
+	<key>100.94.135.81</key>
 	<array>
-		<string>sha256/REPLACE_WITH_ACTUAL_PIN_BASE64==</string>
+		<string>sha256/6TdKmC6vu+lMqntG1BWPeuxvT8BbEEVOFlb1CaAcD3c=</string>
+	</array>
+	<key>mac-mini.tailde842d.ts.net</key>
+	<array>
+		<string>sha256/tS1noKwGh2+E1fiP2zAn3y3C71RE0BQ3IdWSUksLXXs=</string>
 	</array>
 </dict>
 </plist>
