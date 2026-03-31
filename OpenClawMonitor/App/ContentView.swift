@@ -26,6 +26,7 @@ struct MainTabView: View {
     let dashboardSSE: any SSEClientProtocol
     let logsSSE: any SSEClientProtocol
 
+    @Environment(AuthManager.self) private var auth
     @Environment(\.scenePhase) private var scenePhase
     @State private var alertCount = 0
     @State private var backgroundTask: Task<Void, Never>?
@@ -38,7 +39,7 @@ struct MainTabView: View {
                     Label("監控", systemImage: "rectangle.grid.2x2")
                 }
                 .tag(0)
-            LogsView(sseClient: logsSSE)
+            LogsView(sseClient: logsSSE, onUnauthorized: { auth.handleUnauthorized() })
                 .tabItem {
                     Label("日誌", systemImage: "text.justify.left")
                 }

@@ -3,8 +3,8 @@ import SwiftUI
 struct LogsView: View {
     @State private var viewModel: LogsViewModel
 
-    init(sseClient: any SSEClientProtocol) {
-        _viewModel = State(initialValue: LogsViewModel(sseClient: sseClient))
+    init(sseClient: any SSEClientProtocol, onUnauthorized: @escaping () -> Void = {}) {
+        _viewModel = State(initialValue: LogsViewModel(sseClient: sseClient, onUnauthorized: onUnauthorized))
     }
 
     var body: some View {
