@@ -9,6 +9,7 @@ enum MonitorSection: String, CaseIterable {
 struct MonitorView: View {
     let apiClient: any APIClientProtocol
     let sseClient: any SSEClientProtocol
+    @Environment(AuthManager.self) private var auth
     @State private var selectedSection: MonitorSection = .agents
 
     var body: some View {
@@ -25,7 +26,11 @@ struct MonitorView: View {
 
                 switch selectedSection {
                 case .agents:
-                    DashboardView(apiClient: apiClient, sseClient: sseClient)
+                    DashboardView(
+                        apiClient: apiClient,
+                        sseClient: sseClient,
+                        onUnauthorized: { auth.handleUnauthorized() }
+                    )
                 case .cron:
                     CronView(apiClient: apiClient)
                 case .tasks:

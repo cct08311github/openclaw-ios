@@ -158,8 +158,9 @@ private final class TrustAllDelegate: NSObject, URLSessionDelegate {
     }
 
     private func isDevelopmentHost(_ host: String) -> Bool {
+        // Explicit allowlist only — no wildcard matching to prevent DNS rebinding bypass
         let developmentHosts = ["localhost", "127.0.0.1", "100.94.135.81"]
-        return developmentHosts.contains(host) || host.hasSuffix(".local")
+        return developmentHosts.contains(host)
     }
 }
 #endif

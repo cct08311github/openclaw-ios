@@ -31,6 +31,7 @@ final class LogsViewModel {
 
     private let sseClient: any SSEClientProtocol
     private var sseTask: Task<Void, Never>?
+    private var onUnauthorized: (() -> Void)?
     private static let maxLines = 500
 
     var filteredLines: [LogLine] {
@@ -44,8 +45,9 @@ final class LogsViewModel {
         return result
     }
 
-    init(sseClient: any SSEClientProtocol) {
+    init(sseClient: any SSEClientProtocol, onUnauthorized: (() -> Void)? = nil) {
         self.sseClient = sseClient
+        self.onUnauthorized = onUnauthorized
     }
 
     func startStreaming() {
@@ -54,6 +56,10 @@ final class LogsViewModel {
             let stream = await sseClient.connect(endpoint: .logsStream)
             for await event in stream {
                 await updateSSEState()
+                if event.event == "unauthorized" {
+                    self.onUnauthorized?()
+                    continue
+                }
                 parseLogEvent(event.data)
             }
             sseState = .disconnected
